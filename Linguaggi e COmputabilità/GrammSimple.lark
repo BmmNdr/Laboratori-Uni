@@ -1,0 +1,24 @@
+start: ("BEGIN" instruction_block  "END")*
+
+instruction_block: (instruction ";")+
+
+instruction: SKIP | assignement | read | write | if_block | while_block
+
+SKIP: "skip"
+assignement: IDENTIFIER ":=" expression
+read: "read" IDENTIFIER
+write: "write" expression
+if_block: "if" condition "then" instruction_block "else" instruction_block "fi"
+while_block: "while" condition  "do" instruction_block "done"
+
+expression: "(" expression ")" | (SIGNED_NUMBER | IDENTIFIER | expression) OPERATOR? (SIGNED_NUMBER | IDENTIFIER | expression)?
+condition: expression COMPARATOR expression | "(" condition ")"
+
+IDENTIFIER: "R" DIGIT
+OPERATOR: "+" | "-" | "*" | "/"
+COMPARATOR: "<" | ">" | "="
+
+%import common.SIGNED_NUMBER
+%import common.WS
+%import common.DIGIT
+%ignore WS

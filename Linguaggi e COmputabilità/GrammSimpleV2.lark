@@ -1,0 +1,35 @@
+start: "BEGIN" command_s "END"
+
+// Permette sequenze di comandi (command; command; command;)
+command_s: (command ";")+
+
+command:
+    | "skip"                                          -> cmd_skip
+    | "read" IDENTIFIER                               -> cmd_read
+    | "write" exp                                     -> cmd_write
+    | IDENTIFIER ":=" exp                             -> cmd_assign
+    | "if" exp "then" command_s "else" command_s "fi" -> cmd_if
+    | "while" exp "do" command_s "done"               -> cmd_while
+
+// Regole di Espressione 
+exp:
+    | exp "=" exp             -> uguale
+    | exp "<" exp             -> minore
+    | exp ">" exp             -> maggiore
+    | exp "-" exp             -> sub
+    | exp "+" exp             -> sum
+    | exp "*" exp             -> mul
+    | exp "/" exp             -> div
+    | "(" exp ")"
+    | SIGNED_NUMBER
+    | IDENTIFIER                            
+
+// Terminali
+IDENTIFIER: "R" /[0-9]/
+
+%import common.SIGNED_NUMBER 
+%import common.WS
+%ignore WS
+
+%ignore /\/\/.*?\n/ // Ignora i commenti
+

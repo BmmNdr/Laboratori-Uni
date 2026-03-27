@@ -1,0 +1,78 @@
+* Introduzione
+** Comandi Directory
+~getwd()~ --> ottiene la directory corrente
+~setwd("directoryName")~ --> cambia la working directory
+~dir()~ --> ritorna i file nella directory corrente.
+
+** Variabili
+Possiamo dichiarare ed assegnare valori semplicemente digitanto 'x=1'
+Sulle variabili posso effettuare qualisasi calcolo di natura matematica.
+~ls()~ --> lista tutte le variabili dichiarate.
+~rm(variabile)~ --> rimuove una variabile dall'environment.
+~rm(list=ls())~ --> rimuove tutte le variabili esistenti.
+
+*** Vettori
+Si possono dichiarare vettori colonna con il comani ~c()~, ad esempio:
+g=c(1,5,9) oppure g=(1:6,10).
+I vettori sono indicizzati da 1.
+Gli elementi dei vettori sono eterogenei, tuttavia si possono inserire
+componenti di tipi diversi, in quel caso verrà effettuato un casting di tutti gli elementi del vettore al tipo maggiore (ad esempio int => string)
+
+~which(g<4)~ ritorna l'indice delle componenti che rispettano la condizione.
+Posso concatenare più condizioni con and & e or |.
+
+** File
+~dati=read.csv("nomeFile", sep=";")~ --> Carica un file csv specificando il
+separatore.
+~str(dati)~ --> mostra la struttura del dataset
+
+* Statistica Descrittiva
+Carichiamo in R la libreria dataset con ~library(datasets)~
+
+** Frequenze
+All'interno di questa libreria è presente un dataset sugli stati degli stati
+uniti, ad esempio.
+
+state.abb //abbreviazioni degli stati
+state.region[1:5] //regione degli stati
+tbl = table(state.region) //tabella di frequenza assolute delle regioni
+prop.table(tbl) //calcola le frequenze relative
+barplot(tbl) //visualizza un grafico a barre delle frequenze assolute
+barplot(prop.table(tbl), names.arg=("...", ...)) //grafico delle frequenze
+relative, names.arg è opzionale e permette di dare un nome alle classi.
+
+table(dati$var) //mostra le frequenze di una specifica variabile del dataset
+
+** Dati Quantitativi
+Utilizzeremo un dataset sulle precipitazioni e sui fiumi
+
+stripchart(rivers, method="jitter") //diversi tipi di grafico visualizzabili
+stripchart(rivers, method="overplot")
+hist(rivers) //mostra un istogramma, a differenza di barplot mostra anche i
+vuoti
+hist(rivers, breaks=10) //specifica in quante classi dividere i dati
+plot(rivers, type="p") //mostra un grafico a dispersione
+
+** Indici di Posizione
+mean(rivers) //ottiene la media
+mean(rivers, trim=0.05) //calcola rimuovendo il 5% di fiumi più lunghi e più
+corti
+median(rivers) //calcola la mediana
+
+** Indici di Variabilità
+range(rivers) //ritorna il valore minimo e massimo del dataset
+var(rivers) //ritorna la varianza
+sd(rivers) //ritorna la deviazione standard
+IQR(rivers) //range inter quartile
+quantile(rivers, 0.10) //calcola i quartili
+
+boxplot(rivers) //non considera gli outlier (valori superiori al terzo quartile più 1.5*IQR)
+boxplot.stats(rivers) //ottiene quartili e massimi/minimi
+
+summary(dati$var) //mostra un riassiunto degli indici di una variabile
+
+** Dati multipli
+Utilizziamo il dataset iris che misura lunghezza e larghezza di petali
+Per il grafico xyplot è necessario usare library("lattice").
+xyplot(Petal.width ~ Petal.Lenght, data=iris, group=Species) // mostra un
+grafico su x y
