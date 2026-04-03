@@ -76,3 +76,25 @@ Utilizziamo il dataset iris che misura lunghezza e larghezza di petali
 Per il grafico xyplot è necessario usare library("lattice").
 xyplot(Petal.width ~ Petal.Lenght, data=iris, group=Species) // mostra un
 grafico su x y
+
+* Strutture dati
+** Matrici
+Per creare una matrice utilizziamo ~matrix(data, nrow, ncol, byrow=FALSE,
+dimnames)~ dove byrow indica se i valori devono essere inseriti per riga o per
+colonna.
+Possono essere anche create unendo vettori per riga (~rbind~) o per colonna
+(~cbind~).
+L'accesso agli elementi avviene per coordinata tra quadre. Escludendo riga o
+colonna ottengo l'intera riga o colonna corrispondente.
+
+Il prodotto riga per colonna viene effettuato con ~%*%~
+
+** Liste
+Una lista e' un contenitore di oggetti
+~lista=list(vettore=v, matrice=mat, Nomi=nomi)~
+
+* Strutture di controllo
+** if-else
+if(<conditione>) ... else ...
+** for
+for(i in 1:10) print(i)
