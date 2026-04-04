@@ -1,0 +1,15 @@
+Gli smartphone prodotti da una certa azienda S hanno una durata di vita media espressa in mesi
+distribuita secondo una normale con mu=28 e sigma=3, mentre quelli prodotti dall'azienda A hanno una
+durata di vita media distribuita secondo una normale con mu=26 e sigma=2.
+
+Sapendo che la durata di vita e' distribuita secondo un'esponenziale, simulare quante volte uno
+smartphone di tipo A dura di piu' di uno smartpone di tipo S ripetendo l'esperimento 1000000 volte.
+
+Soluzione:
+> dv_s = rnorm(1000000,28,3)
+> dv_a = rnorm(1000000,26,2)
+> length(which(rexp(1000000, rate=1/dv_s) - rexp(1000000, rate=1/dv_a) < 0))
+[1] 481815
+> nvolte = length(which(rexp(1000000, rate=1/dv_s) - rexp(1000000, rate=1/dv_a) < 0)) 
+> nvolte / 1000000
+[1] 0.482376

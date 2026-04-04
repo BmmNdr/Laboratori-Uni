@@ -1,0 +1,16 @@
+Sia X~Exp(0.2) che rappresenta la durata di una batteria in mesi.
+
+Si calcoli la probabilita' che una batteria duri tra i 4 e i 6 mesi:
+> diff(pexp(c(4,6), rate=0.2))
+[1] 0.1481348
+
+Si calcoli la probabilita' che una batteria duri almeno 10 mesi.
+> pexp(10, rate = 0.2, lower.tail = FALSE)
+[1] 0.1353353
+
+Calcolare la probabilia' che la batteria duri altri 10 mesi sapendo che la
+batteria sta duranto da 4 mesi.
+Ovvero P(X >= 14 | X >= 4) =  P(X >= 14) / P(X >= 4)
+> pexp(14, rate = 0.2, lower.tail = FALSE) / pexp(4, rate = 0.2, lower.tail = FALSE)
+[1] 0.1353353
+=> la durata non dipende dal tempo gia' trascorso

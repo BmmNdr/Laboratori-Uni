@@ -4,23 +4,6 @@
 ~setwd("directoryName")~ --> cambia la working directory
 ~dir()~ --> ritorna i file nella directory corrente.
 
-** Variabili
-Possiamo dichiarare ed assegnare valori semplicemente digitanto 'x=1'
-Sulle variabili posso effettuare qualisasi calcolo di natura matematica.
-~ls()~ --> lista tutte le variabili dichiarate.
-~rm(variabile)~ --> rimuove una variabile dall'environment.
-~rm(list=ls())~ --> rimuove tutte le variabili esistenti.
-
-*** Vettori
-Si possono dichiarare vettori colonna con il comani ~c()~, ad esempio:
-g=c(1,5,9) oppure g=(1:6,10).
-I vettori sono indicizzati da 1.
-Gli elementi dei vettori sono eterogenei, tuttavia si possono inserire
-componenti di tipi diversi, in quel caso verrà effettuato un casting di tutti gli elementi del vettore al tipo maggiore (ad esempio int => string)
-
-~which(g<4)~ ritorna l'indice delle componenti che rispettano la condizione.
-Posso concatenare più condizioni con and & e or |.
-
 ** File
 ~dati=read.csv("nomeFile", sep=";")~ --> Carica un file csv specificando il
 separatore.
@@ -66,7 +49,8 @@ sd(rivers) //ritorna la deviazione standard
 IQR(rivers) //range inter quartile
 quantile(rivers, 0.10) //calcola i quartili
 
-boxplot(rivers) //non considera gli outlier (valori superiori al terzo quartile più 1.5*IQR)
+boxplot(rivers) //non considera gli outlier (valori superiori al terzo quartile
+più 1.5*IQR)
 boxplot.stats(rivers) //ottiene quartili e massimi/minimi
 
 summary(dati$var) //mostra un riassiunto degli indici di una variabile
@@ -78,10 +62,28 @@ xyplot(Petal.width ~ Petal.Lenght, data=iris, group=Species) // mostra un
 grafico su x y
 
 * Strutture dati
+** Variabili
+Possiamo dichiarare ed assegnare valori semplicemente digitanto 'x=1'
+Sulle variabili posso effettuare qualisasi calcolo di natura matematica.
+~ls()~ --> lista tutte le variabili dichiarate.
+~rm(variabile)~ --> rimuove una variabile dall'environment.
+~rm(list=ls())~ --> rimuove tutte le variabili esistenti.
+
+** Vettori
+Si possono dichiarare vettori colonna con il comani ~c()~, ad esempio:
+g=c(1,5,9) oppure g=(1:6,10).
+I vettori sono indicizzati da 1.
+Gli elementi dei vettori sono eterogenei, tuttavia si possono inserire
+componenti di tipi diversi, in quel caso verrà effettuato un casting di tutti
+gli elementi del vettore al tipo maggiore (ad esempio int => string)
+
+~which(g<4)~ ritorna l'indice delle componenti che rispettano la condizione.
+Posso concatenare più condizioni con and & e or |.
+
 ** Matrici
 Per creare una matrice utilizziamo ~matrix(data, nrow, ncol, byrow=FALSE,
-dimnames)~ dove byrow indica se i valori devono essere inseriti per riga o per
-colonna.
+dimnames)~ dove byrow indica se i valori devono essere inseriti per riga o
+per colonna.
 Possono essere anche create unendo vettori per riga (~rbind~) o per colonna
 (~cbind~).
 L'accesso agli elementi avviene per coordinata tra quadre. Escludendo riga o
@@ -98,3 +100,80 @@ Una lista e' un contenitore di oggetti
 if(<conditione>) ... else ...
 ** for
 for(i in 1:10) print(i)
+
+* Distribuzioni Discrete
+** Dstribuzione di una v.a.
+Una v.a. standard e' descritta da due vettori: uno per i valori assunti (x) ed
+uno per la probabilita' di assumere questi valori (p).
+Per calcolare il =valore atteso= utilizziamo ~sum(x*p)~.
+Per la =varianza= invece ~sum((x - sum(x*p))^2*p)~.
+
+La =funzione di ripartizione= e' calcolata utilizzando ~cumsum(p)~
+
+Le distribuzioni notevoli sono contenute nel package =stats=
+
+** Distribuzione Binomiale
+Per calcolare la probabilita' di ottenere k successi in n prove con prob. p
+~dbinom=(k, size=n, prob=p)~,
+k puo' anche essere un vettore di interi, ottenendo le singole probabilita' per
+ogni k.
+Per ottenere la probabilita' di ottenere k1 o k2 o k3 succesi possiamo sommare
+le  dbinom oppure sottrattre le pbinom (ovvero la funzione di ripartizione).
+pbinom(9, size = 12, prob = 1/6) - pbinom(6, size = 12, prob =1/6).
+oppure equivalmente ~diff(pbinom(c(6,9), size = 12, prob = 1/6))~
+
+Per disegnare la funzione di ripartizione utilizziamo le funzioni mostrate in
+questo file: [[./TerzoLab/ProbDiscrete.txt][ProbabilitaDiscrete]]
+
+Per mostrare il grafico della distribuzione di probabilita' utilizziamo:
+~plot(c(0:4),dbinom(0:4,4,prob=1/2),type="h",xlab="X")~
+Utilizzando ~text~ possiamo inserire il relativo valore della binomiale nel
+grafico.
+
+** Distribuzione di Poisson
+[[./TerzoLab/ProbDiscretePoisson.txt][Distribuzione Poisson]]
+Per calcolare la probabilita' che si verifichi esattamente k volte un evento:
+~dpois(k, lambda=l)~
+Per calcolare la probabilita' che si verifichi al massimo k volte un evento:
+~ppois(30, lambda=l)~    utiliziamo la funzione di ripartizione.
+
+** Package Distr
+Permette di creare un elevato numero di tipologie di v.a.
+Ad esempio X~Bin(n,p) --> ~x=Binom(size = n, prob = p)~
+E possiamo calcolare la probabilita' che assuma un valore k con: ~d(x)(k)~
+La f di ripartizione in corrispondenza di un valore k: ~p(x)(k)~
+Con ~plot(x)~ ottengo sia il grafico della distribuzione, sia quello dei
+quantili ed anche il grafico della funzione di ripartizione
+
+Lo stesso puo' essere ottenuto con una Y~Pois(l): ~y=Pois(lambda=l)~
+
+* Distribuzioni Continue
+Definiamo la funzione che descrive la densita' di probabilita' con:
+~f=function(x)3*x^2 *x~ e calcolarne l'integrale con ~mu=integrate(f, a, b)~.
+Ovviamente possiamo mostrare il grafico con ~plot(f, a, b)~.
+Con ~mu$value~ otteniamo il valore atteso, che poi posso utilizzare nel calcolo
+della varianza, insieme al calcolo di f al quadrato.
+
+Nei package stats e distr sono presenti alcune distribuzioni notevoli.
+
+** Distribuzione Uniforme
+~x=Unif(a,b)~ permette di creare una distribuzione uniforme tra due limiti.
+~plot(x)~ mostra i 3 grafici. Con il parametro to.drwa.arg=c("d") mostro solo la
+distribuzione.
+[[./TerzoLab/DistrUnif.txt][Esercizio Distribuzione Uniforme]]
+
+Possiamo utilizzare le distribuzioni anche per generare n numeri casuali da una
+distribuzione uniforme compresa tra a e b.
+runif(n=n, min=a, max=b)
+
+** Distribuzione Normale
+Viene creata con ~X=Norm(mean = 15, sd = 5)~.
+Omettendo mean e sd si intende una Normale Standard, per tutte le funzioni.
+La prob che X assuma un valore <= k: pnorm(10, 15, 5).
+Per la probabilita' di X compreso tra due valori si fa la diff di pnorm.
+
+Per calcolare i quantili utilizziamo ~qnorm(percentile, mean, sd)~
+
+** Distribuzione Esponenziale
+Sono gli stesi comandi ma con il suffiso exp.
+[[./TerzoLab/DistrExp.txt][Esercizio Distribuzione Esponenziale]]

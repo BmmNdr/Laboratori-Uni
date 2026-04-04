@@ -1,0 +1,14 @@
+> dpois(0, lambda = 5)
+[1] 0.006737947
+
+> ppois(3, lambda = 5)
+[1] 0.2650259
+
+> ppois(6, lambda=5, lower.tail = FALSE)
+[1] 0.2378165
+
+> 1 - ppois(6, lambda=5)
+[1] 0.2378165
+
+> diff(ppois(c(47, 50), lambda = 50))
+[1] 0.1678485

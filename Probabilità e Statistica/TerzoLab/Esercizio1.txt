@@ -1,0 +1,25 @@
+Uno studente per andare in Universita' puo' scegliere due strade. La strada A e' piu' corta,
+ma molto trafficata. Il tempo di percorrenza e' distribuito secondo una normale con mu=13 e sigma=3.
+La stra B e' piu' lunga, ma meno trafficata. Il tempo di percorrenza e' distribuito secondo una normale
+con mu=15 e sigma=1. Simulare su 240 giorni quante volte sarebbe piu' veloce la strada B rispetto alla
+strada A ed esprimerlo in percentuale.
+
+Posso dire che con probabilita' 0.95 prendendo la strada A arrivero' in meno di 17 minuti?
+E prendendo la strada B?
+
+Soluzione:
+Simuliamo i 240 giorni sulle due strade e troviamo i casi in cui A < B
+> randA = rnorm(240, mean = 13, sd = 3)
+> randB = rnorm(240, mean = 15, sd = 1)
+> C=which(randA-randB<0)
+La probabilita' che la strada A sia piu' veloce della B e' allora:
+> length(C)/240
+[1] 0.7291667
+
+Non posso affermare che prendendo la strada A impieghero' meno di 17 minuti perche:
+> qnorm(0.95, mean=13, sd=3) //95esimo-percentile vale piu' di 17
+[1] 17.93456
+
+Ma posso affermarlo della strada B:
+> qnorm(0.95, mean=15, sd=1)
+[1] 16.64485

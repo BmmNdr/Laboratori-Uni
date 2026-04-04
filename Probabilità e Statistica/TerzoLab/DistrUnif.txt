@@ -1,0 +1,8 @@
+Sia X~U(0,30) che rappresenta la probabilita' di ricevere una telefonata tra le
+10 e le 10:30. Si calcoli la probabilita' che la chiamata arrivi tra le 10:10 e
+le 10:20.
+// Creo la v.a. uniforme
+> x=Unif(0,30)
+// Calcolo la differenza tra le funzioni di ripartizione di 10 e 20
+> diff(punif(c(10,20),0,30))
+[1] 0.3333333
