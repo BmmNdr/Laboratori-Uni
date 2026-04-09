@@ -19,6 +19,7 @@ public class Client {
                 var datagram = new DatagramPacket(payload, payload.length, serverAddress, port);
                 socket.send(datagram);
                 System.out.println("Datagram inviato!");
+                System.out.println("In attesa della risposta...");
 
                 //var buf = new byte[1024];
                 //var datagramResponse = new DatagramPacket(buf, buf.length);

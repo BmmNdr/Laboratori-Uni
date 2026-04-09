@@ -1,5 +1,6 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 public class Server {
     public static void main(String[] args) {
@@ -12,6 +13,7 @@ public class Server {
         try (var socket = new DatagramSocket(port)) {
            
             var buf = new byte[1024];
+            System.out.println("Server in ascolto...");
 
             while (true) {
 
@@ -19,13 +21,17 @@ public class Server {
                 socket.receive(datagram);
 
                 var message = new String(datagram.getData(), 0, datagram.getLength());
+                
+                int clientPort = datagram.getPort();
+                InetAddress clientIP = datagram.getAddress();
+                
                 System.out.printf("Datagramma Ricevuto (%s:%d) con messaggio: %s\n",
-                                    datagram.getAddress().toString(), 
-                                    datagram.getPort(),
+                                    clientIP.toString(), 
+                                    clientPort,
                                     message);
 
                 var payload = message.toUpperCase().getBytes();
-                var datagramResponse = new DatagramPacket(payload, payload.length, datagram.getAddress(), datagram.getPort());
+                var datagramResponse = new DatagramPacket(payload, payload.length, clientIP, clientPort);
                 socket.send(datagramResponse);
             }
 
