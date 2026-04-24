@@ -16,6 +16,7 @@ public class ExampleClient {
             for (int index = 0; index < messages; index++) {
                 // nextLine() blocca il processo perché internamente chiama "read" di
                 // InputStream che è bloccante, aspetta dati dal server.
+                // Una Line è conclusa con '\n'
                 var message = scanner.nextLine();
 
                 System.out.printf("Stringa ricevuta dal server: \"%s\"\n", message);

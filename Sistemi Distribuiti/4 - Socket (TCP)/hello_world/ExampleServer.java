@@ -12,6 +12,7 @@ public class ExampleServer {
                 var socket = serverSocket.accept();
                 System.out.printf("Nuovo client (%s) connesso!\n", socket.getRemoteSocketAddress());
 
+                // in Versione Multi-threaded: avvia un nuovo thread
                 processClient(socket);
                 
                 try {
@@ -28,11 +29,13 @@ public class ExampleServer {
         }
     }
 
+    // Utile per la versione multi-threaded
     private static void processClient(Socket socket) {
         try (socket;
              var scanner = new Scanner(socket.getInputStream())) {
             var output = socket.getOutputStream();
 
+            // E' importante '\n' poichè segnala la fine della linea (il client legge linee)
             System.out.println("Invio delle tre stringhe al client!");
             output.write("Hello\n".getBytes());
             output.write("World\n".getBytes());

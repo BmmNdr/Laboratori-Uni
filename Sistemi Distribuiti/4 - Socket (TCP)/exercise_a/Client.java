@@ -16,7 +16,26 @@ public class Client {
                 System.out.print("Inserisci un fuso orario (\"Esci\" per uscire): ");
                 var timezone = scannerStdin.nextLine();
 
-                // Continuare da qui.
+                var msg = "";
+
+                if (timezone.equals("Esci")) 
+                    // Inviare messaggio di chiusura
+                    msg = "QUIT\n";
+                else 
+                    // Inviare richiesta timezone
+                    msg = "GET_TIME " + timezone + "\n";
+
+                // Invio dei messaggi al Server
+                output.write(msg.getBytes());
+                output.flush();
+
+                // In caso di messaggio di chiusura non attende risposta
+                if (msg.contains("QUIT"))
+                    return;
+
+                // Attesa di risposta dal Server
+                var response = scannerSocket.nextLine();
+                System.out.printf("Stringa ricevuta dal server: \"%s\"\n", response);
             }
         } catch (Exception ex) {
             System.err.println("Errore del server");

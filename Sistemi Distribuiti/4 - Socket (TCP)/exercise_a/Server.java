@@ -30,7 +30,42 @@ public class Server {
             var output = socket.getOutputStream();
 
             while (true) {
-                // Continuare da qui.
+                // Scompongo il messaggio dell'utente
+                var arrayMsg = scanner.nextLine().split("\\s+");
+                var reply = "";
+
+                if (arrayMsg[0].equals("GET_TIME")) {
+                    ZoneId timezone = null;
+                    // Messaggio richiesta time
+                    if (arrayMsg.length > 1){
+                        // E' presente il parametro <timezone> 
+                        try {
+                            timezone = ZoneId.of(arrayMsg[1]);
+                            reply = ZonedDateTime.now(timezone).toString();
+                        } catch (Exception e) {
+                            // Timezone invalida
+                            reply = "Errore: fuso orario sconosciuto";
+                        }
+                    }
+                    else {
+                        // Non sono presenti parametri
+                        timezone = ZoneId.systemDefault();
+                        reply = ZonedDateTime.now(timezone).toString();
+                    }
+                }
+                else if (arrayMsg[0].equals("QUIT")){
+                    // Messaggio di chiusura
+                    System.out.printf("Client (%s) disconnesso!\n", socket.getRemoteSocketAddress());
+                    return;
+                }
+                else {
+                    // Messaggio non riconosciuto
+                    reply = "Errore: messaggio sconosciuto!";
+                }
+
+                // Invio dei messaggi al Client
+                output.write((reply+"\n").getBytes());
+                output.flush();
             }
         } catch (Exception ex) {
             System.err.printf("Errore con il client \"%s\"\n", socket.getRemoteSocketAddress());
