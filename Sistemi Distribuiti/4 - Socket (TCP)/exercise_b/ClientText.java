@@ -1,37 +1,33 @@
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
+import java.net.Socket;
 import java.util.Scanner;
 
 public class ClientText {
     public static void main(String[] args) {
+        final var serverAddress = "127.0.0.1";
         final var serverPort = 8080;
         
-        try (var socket = new DatagramSocket(); var scanner = new Scanner(System.in)) {
+        try (var socket = new Socket(serverAddress, serverPort); 
+            var scannerStd = new Scanner(System.in);
+            var scanner = new Scanner(socket.getInputStream());
+            var output = socket.getOutputStream()) {
+            
             var targetFound = false;
-            final var serverAddress = InetAddress.getByName("127.0.0.1");
 
             while (!targetFound) { // Ciclo infinito finché l'utente non invia CTRl+C.
                 System.out.print("Inserisci il numero ipotizzato: ");
-                var guess = scanner.nextInt();
+                var guess = scannerStd.nextInt();
 
-                // Converte in byte il numero e lo invia al server.
-                //  Viene usata la codifica di default che è UTF-8.
-                var sendBuf = Integer.toString(guess).getBytes();
-                var sendDatagram = new DatagramPacket(sendBuf, sendBuf.length, serverAddress, serverPort);
-                socket.send(sendDatagram);
+                // Invio della guess al Server
+                var msg = (Integer.toString(guess) + "\n").getBytes();
+                output.write(msg);
+                output.flush();
 
                 // Riceve il feedback dal server.
-                var replyBuf = new byte[100];
-                var replyDatagram = new DatagramPacket(replyBuf, replyBuf.length);
-                socket.receive(replyDatagram);
-
-                // Converte il buffer ricevuto in stringa. Lo stampa subito su schermo.
-                var feedback = new String(replyDatagram.getData(), 0, replyDatagram.getLength());
-                System.out.println(feedback);
+                var response = scanner.nextLine();
+                System.out.println("Feedback Server: " + response);
 
                 // Se l'utente ha indovinato si interrompe il gioco.
-                if (feedback.toLowerCase().contains("indovinato")) {
+                if (response.toLowerCase().contains("indovinato")) {
                     targetFound = true;
                 }
             }

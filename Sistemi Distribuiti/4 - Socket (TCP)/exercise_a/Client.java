@@ -28,7 +28,7 @@ public class Client {
                 // Invio dei messaggi al Server
                 output.write(msg.getBytes());
                 output.flush();
-
+                
                 // In caso di messaggio di chiusura non attende risposta
                 if (msg.contains("QUIT"))
                     return;
