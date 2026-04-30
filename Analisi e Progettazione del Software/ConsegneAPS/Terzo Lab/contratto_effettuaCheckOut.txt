@@ -1,0 +1,14 @@
+Contratto effettuaCheckOut
+Operazione: effettuaCheckOut()
+Riferimenti caso d'uso: effettuaCheckOut
+Precondizioni: E' in corso il Pagamento di un Ordine o
+Postcondizioni:
+	- E' stata creata un'istanza p di Pagamento (crezione di oggetto)
+	- L'istanza p di Pagamento è stata associata all'Utente u (formazione di collegamento)
+	- L'istanza p di Pagamento è stata associata all'Ordine o (formazione di collegamento)
+	- Il sistema ha inviato una fattura di conferma per l'Ordine o all'utente.
+	- L'attributo o.pagato di Ordine è true, ovvero ordine pagato (modifica di attributo)
+
+Nuove Classi nel Modello di Dominio: Pagamento
+Nuove Associazioni nel Modello di Dominio: UtenteAutenticato-Pagamento e Pagamento-Ordine
+Nuovi Attributi nel Modello di Dominio: Pagamento.fattura, Ordine.pagato

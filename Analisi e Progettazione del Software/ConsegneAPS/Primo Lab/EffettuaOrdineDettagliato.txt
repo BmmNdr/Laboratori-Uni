@@ -1,0 +1,19 @@
+Nome del caso d'Uso: Effettua Ordine
+Portata: Sistema Easyshop
+Livello: Obiettivo Utente
+Attore Primario: Utente Autenticato
+Parti interessate e interessi: L'utente autenticato vuole poter effettuare un ordine
+Pre-condizioni: L'utente deve essere autenticato
+Post-condizioni: L'ordine viene effettuato e pagato dall'utente, che riceve una fattura scaricabile ed una mail di conferma
+Scenario Principale di Successo:
+	1. Il caso d'uso inizia quando l'utente vuole effettuare un ordine
+	2. Includi CercaProdotti
+	3. L'utente autenticato inserisce la quantità di prodotti cercati che vuole ordinare
+	4. Includi EffettuaPagamento
+	5. Includi ProduceFattura
+	6. Includi InviaConferma
+	7. L'utente scarica la fattura
+Estensioni: -
+Extension Points: -
+Requisiti Speciali: -
+Frequenza di ripetizione: Diverse volte al minuto

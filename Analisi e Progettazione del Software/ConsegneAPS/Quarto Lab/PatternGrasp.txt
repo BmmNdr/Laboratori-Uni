@@ -1,0 +1,4 @@
+Ho applicato il pattern Creator in Ordine, che ha la responsabilità di creare gli oggetti di tipo Pagamento.
+Ho applicato il pattern Controller in OrdineController, in quanto questo oggetto ha il compito di ricevere gli eventi e coordinare l'operazione di sistema per chiudere l'ordine.
+Ho applicato il pattern HighCohesion in OrdineController, in quanto questa classe si occupa solamente di gestire gli ordini.
+
