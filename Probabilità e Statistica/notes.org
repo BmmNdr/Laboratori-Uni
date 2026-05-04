@@ -177,3 +177,6 @@ Per calcolare i quantili utilizziamo ~qnorm(percentile, mean, sd)~
 ** Distribuzione Esponenziale
 Sono gli stesi comandi ma con il suffiso exp.
 [[./TerzoLab/DistrExp.txt][Esercizio Distribuzione Esponenziale]]
+
+* Legge Dei Grandi Numeri
+[[./QuartoLab/GrandiNumeri.txt][Esempio Legge dei Grandi Numeri]]

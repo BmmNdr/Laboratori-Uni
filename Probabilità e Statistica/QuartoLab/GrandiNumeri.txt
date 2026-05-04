@@ -1,0 +1,43 @@
+Prendiamo Xi~Unif(-1,1), u=0 e varianza o^2
+
+sse=runif(1000, -1, 1)   #estraggo 1000 valori da una distr. Unif tra -1 e 1
+mc=cumsum(sse)/(1:1000)  #calcolo la media campionari dei campioni composti da
+                         1,2...1000 elementi
+plot(1:1000,mc,type="l") #grafico a linea delle medie capionarie dei campioni
+abline(h=0,col=2)        #aggiungiamo una linea rossa sullo 0 (ovvero il valore
+                         medio della distribuzione)
+
+
+Ora prendiamo Xi~Ber(p) u=p.
+
+x=c() #vettore dei valori estratti
+for(i in 1:1000){x[i]=rbinom(n=1,size=1,0.5)} #estraggo la binomiale da una
+                                              Bernoulli di size=1 e genero un
+                                              solo valore alla volta n=1
+mc=cumsum(x)/(1:1000)
+plot(1:1000,mc,type="l")
+abline(h=0.5,col=2)
+
+
+Terzo esempio (TLC)
+
+population=runif(10000,1,3) #Definisco una popolazione di 10000 da Unif(1,3)
+mu_pop=mean(population)     #Calcolo Media
+sd_pop = sd(population)     #e varianza
+
+Estraiamo un campione sufficientemente grande per verificare il TLC
+n = 10
+x_bar=c()
+for(i in 1:1000){x_bar[i]=mean(sample(population, n))} #estraggo 1000 campioni
+                                                       di dimensione 10 e ne
+                                                       calcolo la media
+                                                       campionaria
+hist(x_bar,col="blue", freq=FALSE)
+
+Ora sovrapponiamo all'istogramma una distribuzione normale (TLC)
+
+#Crea un vettore di 1000 valori equispaziati in un intervallo:
+x <- seq(mu_pop- 4*sd_pop/sqrt(n),mu_pop+4*sd_pop/sqrt(n),length=1000)
+#Calcola la densita' di prob della distribuzione normale in ogni punto di x
+y <- dnorm(x, mu_pop, sd_pop/sqrt(n))
+lines(x, y, col = "red", lwd = 2)
