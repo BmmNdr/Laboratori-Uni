@@ -178,5 +178,35 @@ Per calcolare i quantili utilizziamo ~qnorm(percentile, mean, sd)~
 Sono gli stesi comandi ma con il suffiso exp.
 [[./TerzoLab/DistrExp.txt][Esercizio Distribuzione Esponenziale]]
 
-* Legge Dei Grandi Numeri
+** Legge Dei Grandi Numeri
 [[./QuartoLab/GrandiNumeri.txt][Esempio Legge dei Grandi Numeri]]
+
+* Stima di Parametri
+** Stima Puntuale
+Estraggo un campione da una popolazione con distr. normale
+~x=rnorm(n=15, 5, 2)~ Estraggo un campione
+~mean(x)~             Calcolo la media campionaria.
+~var(x)~              Calcolo la varianza campionaria.
+
+** Intervallo di Confidenza per la Media
+Calcoliamo l'intervallo di Confidenza al 95%:
+~mean(x)-qnorm(0.975)*2/sqrt(15)~ Limite inferiore dell'interv. confidenza
+~mean(x)+qnorm(0.975)*2/sqrt(15)~ Limite superiore dell'interv. confidenza
+
+** t di Student
+Se la varianza non e' nota devo approssiamre con un t di Student
+~qt(0.975,df=15-1)~ Calcolo il quartile per una t con 14 gradi di liberta'
+
+** library(TeachingDemos)
+Permette di calcolare intervalli di confidenza oer la media della popolazione
+quando la DS della popolazione e' nota.
+~z.test(x,stdev=2)~
+
+Nel caso in cui non conoscessi la DS:
+~t.test(x)~
+
+** Intervallo di Confidenza per la Varianza
+Utilizzando TeachingDemos:
+~sigma.test(x)~
+
+[[./QuintoLab/Esempio.txt][Esempio Svolto in aula]]

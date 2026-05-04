@@ -1,0 +1,11 @@
+Abbiamo un insieme di osservazioni per il quale vogliamo calcolare un intervallo
+di confidenza al 90%
+
+> os=c(1,2,4,5,3,5,6,0,4,6,7)
+> sigma.test(os, conf.level=0.90) #Ottengo la stima della varianza
+
+
+Per stimare la confidenza di una bernulli
+
+> library(Hmisc)
+> binconf(x = 7, n = 25, method = "asymptotic") #x rappresenta il n. di successi
