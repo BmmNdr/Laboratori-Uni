@@ -283,7 +283,7 @@ public class KeyboardsServlet extends HttpServlet {
         kb.setBacklight(isBacklight);
         kb.setLayout(Keyboard.Layout.valueOf(layout));
         
-        synchronized(this) {
+        synchronized(keyboards) {
             kb.setId(lastId++);
             keyboards.add(kb);
         }
