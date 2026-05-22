@@ -45,30 +45,23 @@
         caption.appendChild(document.createTextNode("Lista delle tastiere"));
 
         // Intestazione
-        const thead = table.createTHead();
-        const theadRow = thead.insertRow();
+        const theadRow = table.createTHead().insertRow();
         for (property in keyboards[0]) {
-          let cell = document.createElement("th");
-          cell.appendChild(document.createTextNode(property))
-          theadRow.appendChild(cell);
-
-          //theadRow.insertCell().textContent = property
+          theadRow.insertCell().textContent = property
         }
-        table.thead = thead;
 
         // Elementi
         const tbody = table.createTBody()
         for (keyboard of keyboards) {
           let tableRow = tbody.insertRow();
-
           for (property in keyboard) {
-            let tableData = tableRow.insertCell().textContent = keyboard[property];
+            tableRow.insertCell().textContent = keyboard[property];
           }
         }
 
 
         // Aggiunta della tabella nel DOM (verrà subito visualizzato).
-        table.border = 1;
+        table.setAttribute("border", 2);
         document.body.appendChild(table);
       }
     </script>

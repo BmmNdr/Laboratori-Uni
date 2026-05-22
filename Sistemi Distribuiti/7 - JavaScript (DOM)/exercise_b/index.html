@@ -56,24 +56,76 @@
       function init() {
 
         // 1. Correggere la prima intestazione <h2> in "Questa è una lista".
+        document.getElementById("list-title").textContent = "Questa è una Lista";
 
         // 2. Rimuovere l'elemento "Chrome" dalla lista.
+        const os_list = document.getElementById("os-list")
+        os_list.querySelector("li.Browser").remove();
 
         // 3. Aggiungere l'elemento "Haiku" alla lista.
+        let li = document.createElement("li");
+        li.textContent = "Haiku"
+        os_list.appendChild(li);
 
         // 4. Correggere il refuso "Weebbe" nel penultimo paragrafo.
+        document.getElementById("web-name").textContent = "Web";
 
         // 5. Rimuovere l'attributo hidden dall'ultimo paragrafo.
+        document.getElementById("hidden-paragraph").removeAttribute("hidden");
 
         // 6. Correggere la struttura della tabella usando <thead>, <tbody> e <th>.
         //    (Suggerimento: è possibile ricostruire la tabella usando i dati esistenti)
+        const tableRows = document.getElementById("info-table").querySelectorAll("tr");
+        let table = document.createElement("table");
+        table.id = "info-table";
+        isHeader = true;
+        const tbody = table.createTBody()
+        for (row of tableRows) {
+          let tds = row.querySelectorAll("td");
+          
+          if (isHeader) {
+            const thead = table.createTHead();
+            let tr = thead.insertRow();
+
+            for (td of tds) {
+              const cell = document.createElement("th");
+              cell.textContent = td.textContent;
+              tr.appendChild(cell);
+            }
+
+            isHeader = false;
+
+          }
+          else {
+            let tr = tbody.insertRow();
+
+            for (td of tds) {
+              tr.insertCell().textContent = td.textContent;
+            }
+          }
+        }
+        document.getElementById("info-table").replaceWith(table);
 
         // 7. Aggiungere una colonna "Età" alla tabella:
         //    Mario = 22, Alberto = 20
+        table = document.getElementById("info-table");
+        let th = document.createElement("th");
+        th.textContent = "Età";
+        table.querySelector("thead").querySelector("tr").appendChild(th);
+
+        let trs = table.querySelector("tbody").childNodes;
+        eta = 22;
+        for (tr of trs) {
+          tr.insertCell().textContent = eta;
+          eta -= 2;
+        }
 
         // 8. Aggiungere una didascalia alla tabella.
+        let caption = table.createCaption();
+        caption.textContent = "Utenti del Sistema";
 
         // 9. Aggiungere un bordo alla tabella.
+        table.setAttribute("border", 2);
       }
     </script>
   </body>
