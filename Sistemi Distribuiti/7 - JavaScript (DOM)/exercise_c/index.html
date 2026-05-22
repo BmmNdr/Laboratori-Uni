@@ -79,8 +79,57 @@
       window.onload = init;
       
       function init() {
-        // Partire da qui.
+        const form = document.querySelector("form");
+        form.addEventListener("submit", addElement);
       };
+
+      function addElement(event){
+        event.preventDefault();
+
+        const form = event.target;
+
+        const inputs = form.querySelectorAll("input");
+        console.log(inputs);
+
+        //let keyboard = {};
+        //for(let input of inputs) {
+        //  console.log(input);
+        //  keyboard[input] += input.value;
+        //}
+//
+        //console.log(keyboard);
+
+        const tbody = document.querySelector("table").querySelector("tbody");
+        let row = tbody.insertRow();
+
+        let cell = row.insertCell();
+        cell.textContent = form.querySelector("#name").value;
+
+        cell = row.insertCell();
+        cell.textContent = form.querySelector("#manufacturer").value;
+
+        cell = row.insertCell();
+        cell.textContent = form.querySelector("#year").value;
+
+        cell = row.insertCell();
+        cell.textContent = form.querySelector("#ergonomic").checked;
+
+        cell = row.insertCell();
+        cell.textContent = form.querySelector("#backlight").checked;
+
+        cell = row.insertCell();
+        cell.textContent = form.querySelector("#layout").value;
+
+        cell = row.insertCell();
+        let button = document.createElement("button");
+        button.textContent = "Remove";
+        button.onclick = removeRow;
+        cell.appendChild(button)
+      }
+
+      function removeRow(event) {
+        event.currentTarget.parentNode.parentNode.remove();
+      }
     </script>
   </body>
 </html>
