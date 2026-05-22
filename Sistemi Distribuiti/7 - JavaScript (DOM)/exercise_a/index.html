@@ -33,42 +33,75 @@
 
       // JSON ottenuto dalla parte di codice commentato.
       const json = `[
-  {
-    "name": "K55 RGB PRO",
-    "manufacturer": "Corsair",
-    "year": 2023,
-    "ergonomic": true,
-    "backlight": true,
-    "layout": "QWERTY"
-  },
-  {
-    "name": "K30",
-    "manufacturer": "Corsair",
-    "year": 2020,
-    "ergonomic": false,
-    "backlight": false,
-    "layout": "QWERTY"
-  },
-  {
-    "name": "G213",
-    "manufacturer": "Logitech",
-    "year": 2020,
-    "ergonomic": false,
-    "backlight": true,
-    "layout": "Dvorak"
-  }
-]`
+        {
+          "name": "K55 RGB PRO",
+          "manufacturer": "Corsair",
+          "year": 2023,
+          "ergonomic": true,
+          "backlight": true,
+          "layout": "QWERTY"
+        },
+        {
+          "name": "K30",
+          "manufacturer": "Corsair",
+          "year": 2020,
+          "ergonomic": false,
+          "backlight": false,
+          "layout": "QWERTY"
+        },
+        {
+          "name": "G213",
+          "manufacturer": "Logitech",
+          "year": 2020,
+          "ergonomic": false,
+          "backlight": true,
+          "layout": "Dvorak"
+        }
+      ]`
 
       window.onload = init;
 
       function init() {
         // Parsing del JSON.
+        const keyboards = JSON.parse(json)
 
         // Creazione degli elementi della tabella.
-        // Suggerimento: ogni volta che viene creato un elemento con "let nodoFiglio = document.createElement();",
-        // configurarlo e poi aggiungendo al nodo genitore con "nodoGenitore.appendChild(nodoFiglio);"
+        const table = document.createElement("table");
+
+        const caption = document.createElement("caption");
+        caption.textContent = "Lista delle Tastiere";
+        table.appendChild(caption);
+
+        // Creazione Header
+        const header = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+        for (property in keyboards[0]) {
+          let headerCell = document.createElement("th");
+          headerCell.textContent = property;
+          headerRow.appendChild(headerCell);
+        }
+        header.appendChild(headerRow);
+        table.appendChild(header);
+        
+        // Creazione Contenuto
+        const body = document.createElement("tbody");
+        for (keyboard of keyboards) {
+          let tableRow = document.createElement("tr")
+
+          for (property in keyboard) {
+            let tableData = document.createElement("td");
+            tableData.textContent = keyboard[property];
+            tableRow.appendChild(tableData);
+          }
+
+          body.appendChild(tableRow);
+        }
+        table.appendChild(body);
 
         // Aggiunta della tabella nel DOM (verrà subito visualizzato).
+        table.border = 1;
+        document.body.appendChild(table);
+
       }
     </script>
   </body>
