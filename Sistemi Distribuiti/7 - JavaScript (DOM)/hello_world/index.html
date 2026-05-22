@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Pagina Web di Esempio</title>
+  </head>
+
+  <body>
+    <script>
+      window.onload = init;
+
+      function init() {
+        console.log("Inserisco gli elementi...");
+
+        // Creo un header.
+        const h1 = document.createElement("h1");
+        const h1Text = document.createTextNode("Questa è una pagina Web di Esempio");
+        h1.appendChild(h1Text);
+
+        // Aggiungo subito l'header al DOM.
+        document.body.appendChild(h1);
+
+        // Creo un paragrafo.
+        const p = document.createElement("p");
+        const str = "Numero generato casualmente: " + Math.floor(Math.random() * 1000);
+        const pText = document.createTextNode(str);
+        p.appendChild(pText);
+
+        document.body.appendChild(p);
+
+        // Creazione di una lista
+        const list = ["Gatto", "Tartaruga", "Cane", "Gallina", "Volpe"];
+        const ul = document.createElement("ul");
+        for (let element of list) {
+          const li = document.createElement("li");
+          const liText = document.createTextNode(element);
+          li.appendChild(liText);
+
+          ul.appendChild(li);
+        }
+        document.body.appendChild(ul);
+
+        // Creo un paragrafo per la lista, notare che lo creo dopo ma lo aggiungo
+        // prima nel DOM.
+        const p2 = document.createElement("p");
+        const p2Text = document.createTextNode("Elenco di animali");
+        p2.appendChild(p2Text);
+
+        document.body.insertBefore(p2, ul);
+
+        console.log("Elementi inseriti!");
+      }
+
+    </script>
+  </body>
+</html>

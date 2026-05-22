@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!-- Pagina di esempio che inserisce al caricamento un paragrafo che contiene il testo "Hello World!" -->
+<html>
+  <head>
+    <title>Pagina Web di Esempio</title>
+  </head>
+  <body>
+    <script>
+      window.onload = init;
+
+      function init() {
+        console.log("Hello World!");
+
+        const paragraph = document.createElement("p");
+        const text = document.createTextNode("Hello World!");
+        paragraph.appendChild(text);
+        document.body.appendChild(paragraph);
+      }
+    </script>
+  </body>
+</html>

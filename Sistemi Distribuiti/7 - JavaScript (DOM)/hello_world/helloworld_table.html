@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- Pagina di esempio che inserisce al caricamento della pagina una tabella. -->
+<html>
+  <head>
+    <title>Tabella delle lezioni</title>
+  </head>
+  <body>
+    <h1>Tabella delle lezioni</h1>
+    <script>
+      class Lecture {
+        constructor(date, subject, start, end, place) {
+            this.date = date;
+            this.subject = subject;
+            this.start = start;
+            this.end = end;
+            this.place = place;
+        }
+      }
+
+      const headers = ["Data", "Contenuto", "Ora inizio", "Ora fine", "Luogo"];
+
+      const lectures = [
+        new Lecture("2025-05-10", "Servlet", "9:30", "12:30", "Laboratorio A1 (U14)"),
+        new Lecture("2025-05-17", "REST", "9:30", "12:30", "Laboratorio A1 (U14)"),
+        new Lecture("2025-05-24", "DOM", "9:30", "12:30", "Laboratorio A1 (U14)"),
+        new Lecture("2025-05-29", "AJAX", "14:30", "17:30", "Laboratorio 05 (U9)"),
+      ]
+
+      window.onload = init;
+
+      function init() {
+        const table = document.createElement("table");
+
+        // Creazione e inserimento della didascalia.
+        const caption = table.createCaption();
+        caption.appendChild(document.createTextNode("Lezioni Turno 1"));
+
+        // Creazione e inserimento dell'intestazione.
+        const thead = document.createElement("thead");
+        const theadRow = thead.insertRow();
+        for (let header of headers) {
+            const cell = document.createElement("th");
+            cell.appendChild(document.createTextNode(header));
+            theadRow.appendChild(cell);
+        }
+        table.tHead = thead;
+
+        // Creazione e inserimento delle righe.
+        const body = table.createTBody();
+        for (let lecture of lectures) {
+            const row = body.insertRow();
+            for (let property in lecture) {
+                row.insertCell().textContent = lecture[property];
+            }
+        }
+
+        // Aggiunta della tabella nel DOM.
+        document.body.appendChild(table);
+      }
+    </script>
+  </body>
+</html>

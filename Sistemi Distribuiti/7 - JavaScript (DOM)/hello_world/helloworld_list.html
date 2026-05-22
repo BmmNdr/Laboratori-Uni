@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- Pagina di esempio che inserisce al caricamento una lista di elementi testuali -->
+<html>
+  <head>
+    <title>Lista di colori</title>
+  </head>
+  <body>
+    <h1>Lista di colori</h1>
+    <script>
+      window.onload = init;
+
+      function init() {
+        const colors = ["Rosso", "Giallo", "Blu", "Verde", "Nero", "Bianco", "Arancione"];
+        const list = document.createElement("ul");
+        for (let color of colors) {
+            console.log("Aggiunta dell'elemento ", color);
+
+            const item = document.createElement("li");
+            item.appendChild(document.createTextNode(color));
+            list.appendChild(item);
+        }
+
+        document.body.appendChild(list);
+      }
+    </script>
+  </body>
+</html>

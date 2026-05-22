@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Keyboard App</title>
+  </head>
+
+  <body>
+    <h1>
+      Keyboard App
+    </h1>
+
+    <h2>List of saved keyboards</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Manufacturer</th>
+          <th>Year</th>
+          <th>Ergonomic</th>
+          <th>Backlight</th>
+          <th>Layout</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Add a new keyboard</h2>
+    <form action="/keyboard" method="POST">
+      <p>
+        <label for="name">Name:</label>
+        <br>
+        <input type="text" id="name" name="name" value="" />
+      </p>
+
+      <p>
+        <label for="manufacturer">Manufacturer:</label>
+        <br>
+        <input type="text" id="manufacturer" value="" />
+      </p>
+
+      <p>
+        <label for="year">Year:</label>
+        <br>
+        <input type="number" id="year" value="" />
+      </p>
+
+      <p>
+        <label for="ergonomic">Ergonomic:</label>
+        <br>
+        <input type="checkbox" id="ergonomic" value="" />
+      </p>
+
+      <p>
+        <label for="backlight">Backlight:</label>
+        <br>
+        <input type="checkbox" id="backlight" value="" />
+      </p>
+
+      <p>
+        <label for="layout">Layout:</label>
+        <br>
+        <select id="layout" name="layout">
+          <option value="QWERTY">QWERTY</option>
+          <option value="AZERTY">AZERTY</option>
+          <option value="Dvorak">Dvorak</option>
+        </select>
+      </p>
+
+      <p>
+        <input type="submit" value="Submit" />
+      </p>
+    </form>
+    <script>
+      window.onload = init;
+      
+      function init() {
+        // Partire da qui.
+      };
+    </script>
+  </body>
+</html>

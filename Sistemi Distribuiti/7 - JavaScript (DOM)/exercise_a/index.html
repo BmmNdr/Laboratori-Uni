@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Archivio di tastiere</title>
+  </head>
+  <body>
+    <script>
+      // Come ho generato il JSON? Il codice commentato qui sotto lo fa vedere.
+      /*
+
+      // Definisco una classe giusto per comodità quando costruisco l'array.
+      class Keyboard {
+          constructor(name, manufacturer, year, ergonomic, backlight, layout) {
+          this.name = name;
+          this.manufacturer = manufacturer;
+          this.year = year;
+          this.ergonomic = ergonomic;
+          this.backlight = backlight;
+          this.layout = layout;
+        }
+      }
+
+      // Array con le tastiere.
+      const data = [
+          new Keyboard("K55 RGB PRO", "Corsair", 2023, true, true, "QWERTY"),
+          new Keyboard("K30", "Corsair", 2020, false, false, "QWERTY"),
+          new Keyboard("G213", "Logitech", 2020, false, true, "Dvorak")
+      ];
+
+      // Ottengo il JSON
+      const json = JSON.stringify(data);
+      */
+
+      // JSON ottenuto dalla parte di codice commentato.
+      const json = `[
+  {
+    "name": "K55 RGB PRO",
+    "manufacturer": "Corsair",
+    "year": 2023,
+    "ergonomic": true,
+    "backlight": true,
+    "layout": "QWERTY"
+  },
+  {
+    "name": "K30",
+    "manufacturer": "Corsair",
+    "year": 2020,
+    "ergonomic": false,
+    "backlight": false,
+    "layout": "QWERTY"
+  },
+  {
+    "name": "G213",
+    "manufacturer": "Logitech",
+    "year": 2020,
+    "ergonomic": false,
+    "backlight": true,
+    "layout": "Dvorak"
+  }
+]`
+
+      window.onload = init;
+
+      function init() {
+        // Parsing del JSON.
+
+        // Creazione degli elementi della tabella.
+        // Suggerimento: ogni volta che viene creato un elemento con "let nodoFiglio = document.createElement();",
+        // configurarlo e poi aggiungendo al nodo genitore con "nodoGenitore.appendChild(nodoFiglio);"
+
+        // Aggiunta della tabella nel DOM (verrà subito visualizzato).
+      }
+    </script>
+  </body>
+</html>
