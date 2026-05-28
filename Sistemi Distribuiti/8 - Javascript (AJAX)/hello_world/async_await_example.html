@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Async/Await Example</title>
+  </head>
+
+  <body data-server-no-reload>
+    <script>
+        function resolveAfter2Seconds() {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve('resolved');
+            }, 2000);
+          });
+        }
+        
+        function normalFunction() {
+          console.log("normalFunction: INIZIO");
+          const resolve = resolveAfter2Seconds();
+          console.log("normalFunction: Promise creata!");
+          resolve.then((result) => {
+            console.log(`normalFunction: ${result}`);
+          });
+          console.log("normalFunction: FINE");
+        }
+        
+        async function asyncFunction() {
+          console.log("asyncFunction: INIZIO");
+          const result = await resolveAfter2Seconds();
+          console.log("asyncFunction: Promise creata e aspettata!");
+          console.log(`asyncFunction: ${result}`);
+          console.log("asyncFunction: FINE");
+        }
+        
+        // Ho definito init come una funzione asincrona, per cui l'esecuzione è slegata
+        // dal flusso sequenziale dello script. Il browser si occupa di gestire queste
+        // funzioni, che prima o poi verranno eseguite e completate.
+        window.onload = init;
+
+        async function init() {
+            asyncFunction();
+            normalFunction();
+        }
+    </script>
+  </body>
+</html>

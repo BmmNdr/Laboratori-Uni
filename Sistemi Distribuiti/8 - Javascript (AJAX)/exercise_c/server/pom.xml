@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>it.unimib.sd2026</groupId>
+    <artifactId>keyboard-rest</artifactId>
+    <packaging>war</packaging>
+    <version>0.1</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>21</maven.compiler.release>
+        <jettyVersion>12.1.8</jettyVersion>
+        <jerseyVersion>4.0.2</jerseyVersion>
+        <servletVersion>6.1.0</servletVersion>
+    </properties>
+
+    <dependencies>
+        <!-- Libreria usa l'API Servlet e implementa le API JAX-RS (tra cui le annotazioni usate). -->
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>${jerseyVersion}</version>
+        </dependency>
+
+        <!-- Libreria di supporto che implementa JSON-B e la serializzazione automatica da oggetti Java a JSON
+             e viceversa.
+        -->
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-binding</artifactId>
+            <version>${jerseyVersion}</version>
+        </dependency>
+
+        <!-- Libreria che implementa l'API servlet, usata da Jersey, e in modo indiretto dal progetto.  -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>${servletVersion}</version>
+            <!-- Jetty ha già la libreria che implementa l'API servlet. Serve soltanto per
+                 compilare il progetto.
+            -->
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Libreria per la dependency injection, richiesta da Jersey. -->
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>${jerseyVersion}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Estende Maven in modo da integrare Jetty e poter svolgere il deploy
+                 automatico delle servlet con "mvn jetty:run"
+            -->
+            <plugin>
+                <groupId>org.eclipse.jetty.ee11</groupId>
+                <artifactId>jetty-ee11-maven-plugin</artifactId>
+                <version>${jettyVersion}</version>
+                <configuration>
+                    <scan>1</scan>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

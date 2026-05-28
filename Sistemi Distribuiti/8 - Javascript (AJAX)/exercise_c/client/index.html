@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Keyboard service</title>
+  </head>
+
+  <body data-server-no-reload>
+    <h2>Keyboard list</h2>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Manufacturer</th>
+          <th>Year</th>
+          <th>Ergonomic</th>
+          <th>Backlight</th>
+          <th>Layout</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+
+      </tbody>
+    </table>
+
+    <hr />
+
+    <h2>Add a new keyboard</h2>
+
+    <form id="input-form" action="/keyboards" method="POST">
+      <p>
+        <label for="name">Name:</label>
+        <br>
+        <input type="text" id="input-name" name="name" value="" required>
+      </p>
+
+      <p>
+        <label for="manufacturer">Manufacturer:</label>
+        <br>
+        <input type="text" id="input-manufacturer" name="manufacturer" value="" required>
+      </p>
+
+      <p>
+        <label for="year">Year:</label>
+        <br>
+        <input type="number" id="input-year" name="year" value="" required>
+      </p>
+
+      <p>
+        <label for="ergonomic">Ergonomic:</label>
+        <br>
+        <input type="checkbox" id="input-ergonomic" name="ergonomic" value="">
+      </p>
+
+      <p>
+        <label for="backlight">Backlight:</label>
+        <br>
+        <input type="checkbox" id="input-backlight" name="backlight" value="">
+      </p>
+
+      <p>
+        <label for="layout">Layout:</label>
+        <br>
+        <select id="input-layout" name="layout" required>
+          <option value="QWERTY">QWERTY</option>
+          <option value="AZERTY">AZERTY</option>
+          <option value="Dvorak">Dvorak</option>
+        </select>
+      </p>
+
+      <p>
+        <input type="submit" value="Add Keyboard" />
+      </p>
+    </form>
+
+    <script src="keyboard.js"></script>
+
+    <script>
+      window.onload = init;
+
+      // Ottiene l'elenco delle tastiere e le mostra nella tabella.
+      async function loadKeyboards() {
+        // WIP
+      }
+
+      // Aggiunge la tastiera nella tabella.
+      async function addKeyboard(keyboard) {
+        // WIP
+      }
+
+      // Rimuove la tastiera con l'ID fornito dalla tabella e dal server.
+      async function removeKeyboard(id) {
+        // WIP
+      }
+
+      // Funzione eseguita all'invio del form, crea la tastiera,
+      // la invia al server e poi la mostra nella tabella.
+      async function createKeyboard(event) {
+        // WIP
+      }
+
+      async function init() {
+        // Cose da fare:
+        //    1. Caricare le tastiere nella tabella,
+        //    2. Aggiungere l'event handler per l'invio del form.
+        // Carica le tastiere iniziali.
+      }
+    </script>
+  </body>
+</html>

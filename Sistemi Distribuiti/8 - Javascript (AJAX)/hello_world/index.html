@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>XKCD Visualizer</title>
+  </head>
+
+  <body data-server-no-reload>
+    <script>
+      // La Fetch API si basa sulle Promise, un concetto di JavaScript legato alla
+      // programmazione asincrona. Per questo motivo le funzioni che utilizzano
+      // "fetch" devono essere anche loro asincrone.
+      async function getRandomComic() {
+        const latestComicNumber = 3250;
+
+        // Evito di generare l'ID 0 che non è valido.
+        const comicId = Math.floor(Math.abs(Math.random()) * latestComicNumber) + 1;
+
+        console.log(`Fumetto da recuperare con ID: ${comicId}`);
+
+        // fetch effettua la chiamata GET alla risorsa indicata e restituisce la
+        // risposta. È necessario utilizzare "await" così da aspettare che il
+        // risultato venga recuperato.
+        const response = await fetch(`https://xkcd.com/${comicId}/info.0.json`);
+
+        // fetch restituisce una risposta, che ha metodi e attributi, tra cui "ok"
+        // che indica se la chiamata ha avuto successo.
+        if (!response.ok) {
+          console.log("Richiesta fallita!");
+          return;
+        }
+
+        // Il parsing del JSON è asincrono, motivo per cui è necessario "await".
+        return await response.json();
+      }
+
+      // buildPage dato un fumetto costruisce la pagina HTML in modo dinamico.
+      function buildPage(comic) {
+        // Aggiunge il titolo. Notare che è composto da due testi separati.
+        const h1 = document.createElement("h1");
+        const h1Text = document.createTextNode(comic["safe_title"] + ` - `);
+        h1.appendChild(h1Text);
+
+        // Parte del titolo cliccabile.
+        const numberLink = document.createElement("a");
+        const numberText = document.createTextNode(`Number ${comic["num"]}`);
+        numberLink.setAttribute("href", `https://xkcd.com/${comic["num"]}/`);
+        numberLink.appendChild(numberText);
+        h1.appendChild(numberLink);
+
+        document.body.appendChild(h1);
+
+        // Aggiunge l'immagine.
+        // 
+        // Potrei usare il metodo classico per costruire l'immagine, ma
+        // voglio sfruttare il costruttore specializzato di tipo
+        // HTMLImageElement.
+        //
+        // const img = document.createElement("img");
+        const img = new Image();
+        img.src = comic["img"];
+        img.alt = comic["alt"];
+        document.body.appendChild(img);
+
+        console.log("Codice HTML costruito!");
+      }
+
+      // Ho definito init come una funzione asincrona, per cui l'esecuzione è slegata
+      // dal flusso sequenziale dello script. Il browser si occupa di gestire queste
+      // funzioni, che prima o poi verranno eseguite e completate.
+      window.onload = init;
+
+      async function init() {
+        const comic = await getRandomComic();
+
+        if (comic) {
+          buildPage(comic);
+        } else {
+          console.error("Impossibile ottenere il fumetto!");
+        }
+      }
+
+    </script>
+  </body>
+</html>

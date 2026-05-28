@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hacker News Clone</title>
+  </head>
+  <body data-server-no-reload>
+    <h1>Hacker News Clone</h1>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Points</th>
+          <th>Name</th>
+          <th>Link</th>
+          <th>Published</th>
+          <th>Poster</th>
+          <th>Comments</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+
+      </tbody>
+    </table>
+    <script>
+      // Prefisso per l'API.
+      const API_URI = "https://hacker-news.firebaseio.com";
+
+      // Numero di storie da mostrare.
+      const MAX_STORIES = 30;
+
+      // Questa funzione è generica per le richieste GET a un qualsiasi endpoint.
+      // Restituisce l'oggetto risultato dal parsing del JSON.
+      async function getFetch(endpoint) {
+        // WIP
+      }
+
+      // addStory aggiunge la storia nel DOM creando una nuova riga.
+      function addStory(story) {
+        // WIP
+      }
+
+      // Ho definito init come una funzione asincrona, per cui l'esecuzione è slegata
+      // dal flusso sequenziale dello script. Il browser si occupa di gestire queste
+      // funzioni, che prima o poi verranno eseguite e completate.
+      window.onload = init;
+
+      async function init() {
+        // Ottengo tutti gli ID delle storie nella categoria best. L'endpoint
+        // restituisce una lista di ID.
+        // WIP
+
+        // L'API potrebbe restituire meno di 30 storie, è un caso raro.
+        const limit = Math.min(MAX_STORIES, bestStories.length);
+
+        // Ottengo i dati delle prime 30 storie, ognuna la aggiungo nel DOM
+        // come riga della tabella.
+        for (let i = 0; i < limit; i++) {
+          // WIP
+        }
+      }
+    </script>
+  </body>
+</html>

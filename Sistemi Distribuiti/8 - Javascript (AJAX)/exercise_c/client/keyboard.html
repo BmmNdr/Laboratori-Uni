@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title id="title-text"></title>
+  </head>
+
+  <body data-server-no-reload>
+    <h2 id="h2-text"></h2>
+
+    <ul>
+        <li><b>ID: </b><span id="text-id"></span></li>
+        <li><b>Name: </b><span id="text-name"></span></li>
+        <li><b>Manufacturer: </b><span id="text-manufacturer"></span></li>
+        <li><b>Year: </b><span id="text-year"></span></li>
+        <li><b>Ergonomic: </b><span id="text-ergonomic"></span></li>
+        <li><b>Backlight: </b><span id="text-backlight"></span></li>
+        <li><b>Layout: </b><span id="text-layout"></span></li>
+    </ul>
+
+    <p>Back to <a href="index.html">home</a>.</p>
+
+    <h3>Comments</h3>
+    
+    <ul id="comments">
+    </ul>
+
+    <h3>Add a new comment</h3>
+
+    <form id="input-form" action="/keyboards" method="POST">
+      <p>
+        <label for="contant">Content:</label>
+        <br>
+        <input type="text" id="input-content" name="content" value="" required>
+      </p>
+
+      <p>
+        <input type="submit" value="Add Comment" />
+      </p>
+    </form>
+
+    <script src="keyboard.js"></script>
+
+    <script>
+      // Ottiene il parametro di query nell'URL, che identifica una tastiera.
+      const params = new URLSearchParams(document.location.search);
+      const id = params.get("id");
+
+      window.onload = init;
+
+      // Ottiene le info sulla tastiera e popola la pagina.
+      async function loadKeyboard(id) {
+        // WIP
+      }
+
+      async function addComment(comment) {
+        // WIP
+      }
+
+      // Rimuove lo specifico commento, sia dal server che dalla lista.
+      function removeComment(commentId) {
+        // WIP
+      }
+
+      // Crea un nuovo commento per la tastiera con l'ID fornito.
+      async function createComment(keyboardId, event) {
+        // WIP
+      }
+
+      async function init() {
+        // Cose da fare:
+        //    1. Carica la tastiera e la mostra nella pagina.
+        //    2. Associa l'event handler createComment all'invio del commento.
+      }
+    </script>
+  </body>
+</html>

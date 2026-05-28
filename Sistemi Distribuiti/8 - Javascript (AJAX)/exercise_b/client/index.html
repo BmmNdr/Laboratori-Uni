@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Subscribed Users</title>
+  </head>
+  <body data-server-no-reload>
+    <h2>Add a new user</h2>
+
+    <form id="add-user" action="/users" method="POST">
+      <label for="name">Name: </label>
+      <input type="text" id="input-name" required>
+      <p />
+      <input type="submit" value="Subscribe!">
+    </form>
+
+    <hr />
+
+    <h2>Subscribed Users</h2>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Joined at</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+
+      </tbody>
+    </table>
+    <script>
+      const API_URI = "http://localhost:8080";
+
+      // getUsers restituisce gli utenti iscritti.
+      async function getUsers() {
+        // Bisogna effettuare i seguenti passi:
+        //
+        //	1. Chiamare GET "http://localhost:8080/users",
+        //	2. Controllare che la chiamata abbia avuto successo,
+        //	3. Restituise l'oggetto (lista di utenti) facendo il parsing del JSON.
+      }
+
+      // deleteUser elimina l'utente con l'ID fornito.
+      async function deleteUser(userId) {
+        // Bisogna effettuare i seguenti passi:
+        //
+        //	1. Chiamare DELETE "http://localhost:8080/users/{userId}",
+        //	2. Controllare che la chiamata abbia avuto successo.
+      }
+
+      // getUser restituisce il singolo utente iscritto.
+      async function getUser(userId) {
+        // La funzione è molto simile a getUsers. Bisogna effettuare i
+        // seguenti passi:
+        //
+        //	1. Chiamare GET "http://localhost:8080/users/{userId}",
+        //	2. Controllare che la chiamata abbia avuto successo,
+        //	3. Restituise l'oggetto (l'utente) facendo il parsing del JSON.
+      }
+
+      // setUserName aggiorna il nome utente con l'ID fornito.
+      async function setUserName(userId, name) {
+        // Bisogna effettuare i seguenti passi:
+        //
+        //	1. Chiamare PUT "http://localhost:8080/users/{userId}" con
+        //		 nel body la rappresentazione JSON di una stringa,
+        //	2. Controllare che la chiamata abbia avuto successo.
+      }
+
+      // newUser aggiunge un utente al server, restituisce il nuovo ID.
+      async function newUser(user) {
+        // Bisogna effettuare i seguenti passi:
+        //
+        //	1. Chiamare POST "http://localhost:8080/users/{userId}" con
+        //		 nel body la rappresentazione JSON del nuovo utente,
+        //	2. Controllare che la chiamata abbia avuto successo,
+        //	3. Controllare l'header "Location", estrarre l'ID alla fine
+        //		 e restituirlo.
+      }
+
+      function onError(msg, error) {
+        const out = `${msg}: ${error}`;
+        console.error(out);
+        alert(out);
+      }
+
+      // newUserDOM viene eseguita all'invio del from. Aggiunta un nuovo
+      // utente, prima inviandolo al server e poi mettendolo nella tabella.
+      async function newUserDOM(event) {
+        // Evito che il form venga davvero inviato.
+        event.preventDefault();
+
+        // L'unico dato che devo inviare è "name", lo recupero dal DOM.
+        const input = document.getElementById("input-name");
+        const name = input.value;
+
+        // Pulisco il form, ormai non serve più.
+        input.value = "";
+
+        try {
+          // Creo il nuovo oggetto e lo invio al server, restituisce il
+          // nuovo ID.
+          const userId = await newUser({
+            "name": name
+          });
+
+          // Ottengo il nuovo utente con tutte le informazioni.
+          const user = await getUser(userId);
+
+          // Infine lo aggiungo alla tabella.
+          addUserDOM(user);
+        } catch (error) {
+          onError("Failed to add a new user", error);
+        }
+      }
+
+      // editUserDOM viene eseguita quando l'utente clicca sul pulsante di modifica.
+      // Rende il campo del nome editabile e, quando preme invio, modifica il nome
+      // con il valore del campo di testo.
+      async function editUserDOM(userId, nameCell) {
+        let user;
+
+        // Ho bisogno dell'utente attuale per popolare la casella di testo
+        // con il nome già esistente.
+        try {
+          user = await getUser(userId);
+        } catch (error) {
+          onError("Failed to get user", error);
+          return;
+        }
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = user["name"];
+        // Il campo di testo è sensibile all'evento "keyup", che sarebbe il
+        // rilascio di un tasto della tastiera.
+        input.addEventListener("keyup", async (event) => {
+          if (event.code != "Enter")
+            return;
+
+          // Se una delle funzioni asincrone da errore allora verrà gestito
+          // dal blocco dentro catch.
+          try {
+            await setUserName(user["id"], input.value);
+
+            const updatedUser = await getUser(user["id"]);
+
+            nameCell.replaceChildren(document.createTextNode(updatedUser["name"]));
+          } catch (error) {
+            // Ripristina il vecchio valore.
+            nameCell.replaceChildren(document.createTextNode(user["name"]));
+            onError("Failed to set user name", error);
+          }
+        });
+        nameCell.replaceChildren(input);
+      }
+
+      // addUserDOM aggiunge l'utente fornito in una nuova riga della tabella.
+      function addUserDOM(user) {
+        // Selezione di <tbody> e aggiunta di una nuova riga.
+        const tbody = document.getElementById("table-body");
+        const row = tbody.insertRow();
+
+        // Aggiunta dell'ID.
+        const id = row.insertCell();
+        id.setAttribute("align", "center");
+        const idText = document.createTextNode(user["id"]);
+        id.appendChild(idText);
+
+        // Aggiunta del nome.
+        const name = row.insertCell();
+        name.setAttribute("align", "center");
+        const nameText = document.createTextNode(user["name"]);
+        name.appendChild(nameText);
+
+        // Aggiunta della data di iscrizione.
+        const joined = row.insertCell();
+        joined.setAttribute("align", "center");
+        // Il server espone la data come "AAAA-MM-GG", passo la stringa
+        // direttamente nel costruttore di Date.
+        const date = new Date(user["joined"])
+        const dateText = document.createTextNode(date.toLocaleDateString("it-IT"));
+        joined.appendChild(dateText);
+
+        // Aggiunta dei pulsanti di azione.
+        const actions = row.insertCell();
+        actions.setAttribute("align", "center");
+
+        // Agginta del pulsante di modifica del nome utente.
+        const editButton = document.createElement("button");
+        actions.appendChild(editButton);
+        const editText = document.createTextNode("Edit name");
+        editButton.appendChild(editText);
+        editButton.addEventListener("click", () => {
+          // Con le funzioni anonime è possibile catturare dei riferimenti
+          // e passarli ad altre funzioni, come in questo caso.
+          editUserDOM(user["id"], name);
+        });
+
+        // Aggiunta del pulsante di rimozione dell'utente.
+        const removeButton = document.createElement("button");
+        actions.appendChild(removeButton);
+        const removeText = document.createTextNode("Remove");
+        removeButton.appendChild(removeText);
+        removeButton.addEventListener("click", () => {
+          // Anche in questo caso deleteUser è asincrona, per cui
+          // esegue la prima funzione in caso di successo e la seconda
+          // in caso di errore.
+          deleteUser(user["id"]).then(() => row.remove(),
+            (error) => onError("Failed to delete user", error));
+        });
+      }
+
+      // Ho definito init come una funzione asincrona, per cui l'esecuzione è slegata
+      // dal flusso sequenziale dello script. Il browser si occupa di gestire queste
+      // funzioni, che prima o poi verranno eseguite e completate.
+      window.onload = init;
+
+      async function init() {
+        // getUsers è asincrona, per cui restituisce una Promise che verrà eseguita
+        // in modo asincrono. Il metodo then permette di eseguire due funzioni: la
+        // prima in caso di successo, la seconda in caso di errore.
+        getUsers().then((users) => users.forEach(addUserDOM),
+          (error) => onError("Failed to get users", error));
+
+        // Aggiungo l'event handler per l'evento di invio al form.
+        const form = document.getElementById("add-user");
+        form.addEventListener("submit", newUserDOM);
+      }
+    </script>
+  </body>
+</html>
