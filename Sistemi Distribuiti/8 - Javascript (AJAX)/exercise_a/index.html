@@ -27,16 +27,41 @@
 
       // Numero di storie da mostrare.
       const MAX_STORIES = 30;
+      const tableBody = document.getElementById("table-body");
 
       // Questa funzione è generica per le richieste GET a un qualsiasi endpoint.
       // Restituisce l'oggetto risultato dal parsing del JSON.
       async function getFetch(endpoint) {
-        // WIP
+        const response = await fetch(endpoint);
+
+        if (!response.ok) {
+          console.error("Request Failed!");
+          return;
+        }
+
+        return await response.json();
       }
 
       // addStory aggiunge la storia nel DOM creando una nuova riga.
-      function addStory(story) {
-        // WIP
+      async function addStory(story) {
+        let tr = tableBody.insertRow();
+
+        tr.insertCell().textContent = story.score;
+        tr.insertCell().textContent = story.title;
+        
+        let storyLink = document.createElement("a");
+        storyLink.textContent = "Link";
+        storyLink.setAttribute("href", story.url);
+        tr.insertCell().appendChild(storyLink);
+
+        tr.insertCell().textContent = new Date(story.time * 1000).toLocaleString("it-IT");
+        tr.insertCell().textContent = story.by;
+        
+        let commentLink = document.createElement("a");
+        commentLink.textContent = story.kids.length;
+        let comments = `https://news.ycombinator.com/item?id=${story.id}`;
+        commentLink.setAttribute("href", comments);
+        tr.insertCell().appendChild(commentLink);
       }
 
       // Ho definito init come una funzione asincrona, per cui l'esecuzione è slegata
@@ -47,7 +72,7 @@
       async function init() {
         // Ottengo tutti gli ID delle storie nella categoria best. L'endpoint
         // restituisce una lista di ID.
-        // WIP
+        const bestStories = await getFetch(`${API_URI}/v0/beststories.json`);
 
         // L'API potrebbe restituire meno di 30 storie, è un caso raro.
         const limit = Math.min(MAX_STORIES, bestStories.length);
@@ -55,7 +80,9 @@
         // Ottengo i dati delle prime 30 storie, ognuna la aggiungo nel DOM
         // come riga della tabella.
         for (let i = 0; i < limit; i++) {
-          // WIP
+          let story = await getFetch(`${API_URI}/v0/item/${bestStories[i]}.json`);
+          //console.log(story);
+          addStory(story);
         }
       }
     </script>
