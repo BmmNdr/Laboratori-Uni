@@ -36,10 +36,15 @@
       // getUsers restituisce gli utenti iscritti.
       async function getUsers() {
         // Bisogna effettuare i seguenti passi:
-        //
         //	1. Chiamare GET "http://localhost:8080/users",
+        const response = await fetch("http://localhost:8080/users");
         //	2. Controllare che la chiamata abbia avuto successo,
+        if (!response.ok) {
+          console.error("Richiesta fallita!");
+          return;
+        }
         //	3. Restituise l'oggetto (lista di utenti) facendo il parsing del JSON.
+        return response.json();
       }
 
       // deleteUser elimina l'utente con l'ID fornito.
@@ -47,7 +52,14 @@
         // Bisogna effettuare i seguenti passi:
         //
         //	1. Chiamare DELETE "http://localhost:8080/users/{userId}",
+        const response = await fetch(`http://localhost:8080/users/${userId}`, {
+          method: "DELETE"
+        });
         //	2. Controllare che la chiamata abbia avuto successo.
+        if (!response.ok) {
+          console.error("Richiesta fallita!");
+          return;
+        }
       }
 
       // getUser restituisce il singolo utente iscritto.
@@ -56,8 +68,14 @@
         // seguenti passi:
         //
         //	1. Chiamare GET "http://localhost:8080/users/{userId}",
+        const response = await fetch(`http://localhost:8080/users/${userId}`);
         //	2. Controllare che la chiamata abbia avuto successo,
+        if (!response.ok) {
+          console.error("Richiesta fallita!");
+          return;
+        }
         //	3. Restituise l'oggetto (l'utente) facendo il parsing del JSON.
+         return response.json();
       }
 
       // setUserName aggiorna il nome utente con l'ID fornito.
@@ -66,18 +84,41 @@
         //
         //	1. Chiamare PUT "http://localhost:8080/users/{userId}" con
         //		 nel body la rappresentazione JSON di una stringa,
+        const response = await fetch(`http://localhost:8080/users/${userId}/name`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(name)
+        });
         //	2. Controllare che la chiamata abbia avuto successo.
+        if (!response.ok) {
+          console.error("Richiesta fallita!");
+          return;
+        }
       }
 
       // newUser aggiunge un utente al server, restituisce il nuovo ID.
       async function newUser(user) {
         // Bisogna effettuare i seguenti passi:
         //
-        //	1. Chiamare POST "http://localhost:8080/users/{userId}" con
+        //	1. Chiamare POST "http://localhost:8080/users" con
         //		 nel body la rappresentazione JSON del nuovo utente,
+        const response = await fetch(`http://localhost:8080/users/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user)
+        });
         //	2. Controllare che la chiamata abbia avuto successo,
+        if (!response.ok) {
+          console.error("Richiesta fallita!");
+          return;
+        }
         //	3. Controllare l'header "Location", estrarre l'ID alla fine
         //		 e restituirlo.
+        return response.headers.get("Location").split("/").pop();
       }
 
       function onError(msg, error) {
