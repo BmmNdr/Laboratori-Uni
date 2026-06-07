@@ -1,0 +1,31 @@
+PROGETTO OLIMPIADI MILANO-CORTINA 2026
+
+Questa documentazione riassume l'applicazione dei pattern GRASP e GoF.
+
+---
+1. PATTERN GRASP
+
+- Information Expert
+  - Classe "Acquisto" poiché possiede la lista dei biglietti e le relative tariffe, è l'Information Expert responsabile del calcolo del costo totale.
+  - Classe "SessioneAllenamento": Possiede le informazioni temporali necessarie per stabilire se la sessione è cancellabile. È quindi essa a dover validare la cancellazione.
+
+- Controller
+  - "GestioneBiglietteriaController" e "GestioneAllenamentiController": Ricevono i dati dall'interfaccia (input utente), inizializzano le entità di dominio (es. crea un oggetto Acquisto) e avviano le operazioni.
+
+---
+2. PATTERN GoF
+
+- Strategy Pattern
+Applicazione nel progetto (Sconti):
+  - Interfaccia "IScontoStrategy": Definisce il metodo `getToale()`.
+  - Implementazioni concrete: "Sconto2Attivita", "ScontoAttivitaEvento", "ScontoMultiple".
+  - Vantaggio: Nuover regole di sconto possono essere create creando una nuova classe Strategy senza dover modificare il codice della classe "Acquisto" o del "Controller".
+
+- Observer Pattern (Comportamentale)
+Concetto: Definisce una dipendenza uno-a-molti tra oggetti, in modo che quando un oggetto cambia stato, tutti i suoi dipendenti vengano notificati.
+Applicazione nel progetto (Notifiche Cancellazione):
+  - Subject: "SessioneAllenamento". Mantiene una lista di osservatori (Atleti iscritti).
+  - Observer: "Atleta" (o interfaccia Notificabile).
+  - Meccanismo: Quando la sessione viene cancellata tramite `cancellaSessione()`, il soggetto cicla la lista degli osservatori e invia la notifica.
+  - Vantaggio: Disaccoppia la logica della sessione dal metodo di notifica (email/SMS), rendendo il sistema estensibile a nuovi canali di comunicazione.
+Lo stesso viene fatto per le prenotazioni.

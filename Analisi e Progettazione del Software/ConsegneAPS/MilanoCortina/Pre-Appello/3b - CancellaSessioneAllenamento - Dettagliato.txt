@@ -1,0 +1,31 @@
+Nome del caso d'uso: CancellaSessioneAllenamento
+Attore Primario: Allenatore
+Portata: Sistema Software Olimpiadi Milano-Cortina 2026
+Livello: Obiettivo Utente
+Parti interessate e Interessi: L'Allenatore vuole poter cancellare una sessione di allenamento precedentemente creata
+Pre-condizioni:
+	- L'allenatore deve esistere nel sistema
+	- La sessione di allenamento che si vuole eliminare deve esistere nel sistema
+	- Manca piu' di un'ora all'inizio della sessione di allenamento
+Post-condizioni:
+	- La sessione di allenamento e' stata rimossa dal sistema
+	- E' stata inviata una notifica agli atleti iscritti alla sessione di allanemento.
+Scenario principale di successo:
+	 1. Il caso d'uso inizia quando l'allenatore accede al sistema
+	 2. Il sistema richiede l'autenticazione (Includi LoginUtente)
+	 3. Il sistema mostra le sessioni di allenamento create dall'allenatore
+	 4. L'allenatore seleziona la sessione che vuole eliminare
+	 5. L'allenatore conferma l'eliminazione della sessione
+	 6. Il sistema verifica che manchi piu' di un ora dall'inizio della sessione di allenamento
+	 7. Il sistema elimina la sessione di allenamento
+	 8. Il sistema invia una notifica a tutti gli atleti iscritti alla sessione di allenamento
+Estensioni:
+	2a. Il login fallisce
+	    2a.1 Il sistema notifica il fallimento. Si ritorna al passo 1
+	5b. L'allenatore annulla la cancellazione. Si ritorna al punto 3
+	6a. L'allenatore seleziona una sessione che inizia tra meno di un'ora
+	    6a.1 Il sistema notifica che non e' possibile cancellare quella sessione. Si ritorna al punto 3
+
+Extension Points: -
+Requisiti Speciali: -
+Frequenza di ripetizione: Diverse volte al minuto

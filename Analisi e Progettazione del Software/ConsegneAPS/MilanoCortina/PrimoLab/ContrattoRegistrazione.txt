@@ -1,0 +1,25 @@
+Contratto RegistrazioneVisitatore
+Operazione: registrazioneVisitatore(nome: String, cognome: String, dataNascita: Date, indirizzo: String, telefono: String)
+Riferimenti caso d'uso: Registrazione
+Precondizioni:
+	- E' richiesta la registrazione di un nuovo visitatore v
+	- Il visitatore v non deve essere gia' registrato
+	- Sono stati inseriti tutti i dati necessari:
+	  - Nome
+	  - Cognome
+	  - DataNascita
+	  - Indirizzo
+	  - Telefono
+	- Nel sistema esiste una lista l che salva i visitatori registrati.
+Postcondizioni:
+	- E' stata creata una nuova instanza di Visitatore v (Creazione di oggetto)
+	- v.nome e' stato inizializzato con Nome (modifica di attributo)
+	- v.cognome e' stato inizializzato con Cognome (modifica di attributo)
+	- v.dataNascita e' stato inizializzato con DataNascita (modifica di attributo)
+	- v.indirizzo e' stato inizializzato con Indirizzo (modifica di attributo)
+	- v.telefono e' stato inizializzato con Telefono (modifica di attributo)
+	- v E' stato inserito nella lista l (formazione di collegamento)
+	- Il sistema notifica l'avvenuta registrazione. 
+
+
+	

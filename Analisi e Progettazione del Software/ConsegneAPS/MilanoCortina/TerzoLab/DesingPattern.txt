@@ -1,0 +1,7 @@
+Design Pattern Applicati:
+
+Abbiamo utilizzato Singleton per SistemaOlimpiadi e per i Controller in modo da avere un Single Point of Access.
+
+SistemaOlimpiadi e' anche un Facade, in quanto nasconde il sistema (controller) ed interagisce con l'attore.
+
+Gli Use Case Controller utilizzati agiscono anche come Factory per istanziare oggetti del dominio.

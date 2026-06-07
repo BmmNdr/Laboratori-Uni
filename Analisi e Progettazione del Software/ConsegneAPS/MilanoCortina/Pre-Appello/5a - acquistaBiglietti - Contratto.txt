@@ -1,0 +1,12 @@
+Contratto acquistaBiglietti
+Operazione: acquistaBiglietti(listaBiglietti : Biglietti)
+Riferimenti caso d'uso: Acquista Biglietti
+Precondizioni:
+    - L'utente Visitatore v e' autenticato
+    - Il Visitatore v ha selezionato una lista di biglietti : listaBiglietti
+Postcondizioni:
+	- E' stata creata una nuova istanza di Acquisto a
+	- L'istanza a e' associata all'istanza Visitatore v corrente
+	- I biglietti selezionati (listaBiglietti) sono stati associati all'acquisto a
+	- L'attributo a.costo e' stato calcolato seguendo una strategia di sconto
+	- a.isPagato e' stato impostato a true

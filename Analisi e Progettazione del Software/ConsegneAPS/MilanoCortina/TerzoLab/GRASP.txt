@@ -1,0 +1,34 @@
+Pattern GRASP applicati:
+
+(Use Case) Controller:
+    - SistemaOlimpiadi (che è Facade Controller)
+    - GestioneAccessiController
+    - GestioneProgrammaController
+    - GestioneIscrizioniController
+    - GestioneBiglietteriaController
+    - GestioneValutazioniController
+    - GestioneBudgetController
+    - CalendarioController
+
+pattern Information Expert:
+    - Acquisto.isCancellabile(): l'Acquisto ha la responsabilita' di sapere se puo' essere cancellato
+    - Acquisto.calcolaTotale(): l'Acquisto ha la resposnsabilita' di calcolare il totale in quanto possiede la lista di Biglietti ed il costo
+    - Attivita.isSovrapposta(altraAttivita): Le sovrapposizioni vengono calcolate dall'Attivita' in quanto conosce data e oraInizio
+
+pattern Creator:
+    - GestioneBiglietteriaController che si occupa di creare gli Acquisti
+    - GestioneValutazioniController che si occupadi creare (inserire) le Valutazioni
+    - GestioniIscrizioniController che si occupa di creare le Iscrizioni
+    - GestioneProgrammaController che si occupa di creare (inserire) le Attività
+    - GestioneAccessiController che si occupa di creare (inserire) nuovi Utenti
+    - Acquisto crea Biglietto: Essendo Acquisto il contenitore di Biglietti e' anche il Creator
+
+High Cohesion:
+    - Separazione dei Controller invece di una unica classe SistemaController
+    - Classe Ranking: la classifica non viene calcolata in Attivita' per separare dati "logistici" e risultati
+
+Low Coupling
+    - Utilizzo del Polimorfismo con Attivita e Utente
+    - Separazione Dominio/Infrastruttura: Un Controller si occupa del Login e non i singoli utenti
+
+

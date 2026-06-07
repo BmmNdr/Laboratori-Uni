@@ -1,0 +1,74 @@
+﻿Caso d'Uso: Assegna Capitano
+Portata: Sistema software Olimpiadi Milano-Cortina 2026.
+Livello: Obiettivo utente.
+Attore primario: Manager
+
+Parti interessate e interessi:
+	Manager: Vuole assegnare il ruolo di capitano per ogni attività sportiva alla quale partecipa almeno un atleta della propria squadra.
+	Squadra: Vuole che il capitano rappresenti correttamente la squadra nell'attività sportiva.
+	Atleta: Vuole che il ruolo di capitano venga assegnato in modo equo e all'atleta che ha ottenuto i migliori risultati durante l'anno in corso.
+	Comitato Sportivo: Vuole che i risultati degli atleti e le classifiche siano mantenuti correttamente.
+	Sistema Olimpico: Deve garantire che il capitano assegnato soddisfi i requisiti stabiliti dalle specifiche.
+
+Pre-condizioni
+	- Il Manager è identificato e autenticato.
+	- Il Manager è associato a una squadra.
+	- Esiste almeno un'attività sportiva alla quale partecipa almeno un atleta della sua squadra.
+	- Il sistema memorizza i risultati ottenuti dagli atleti nelle diverse attività sportive.
+
+Post-condizioni
+	- Viene assegnato un capitano per l'attività selezionata.
+	- Il capitano appartiene alla squadra del Manager.
+	- Il capitano è iscritto all'attività sportiva selezionata.
+	- Il capitano è l'atleta che ha ottenuto i migliori risultati durante l'anno in corso tra quelli iscritti a tale attività.
+	- L'assegnazione viene registrata nel sistema.
+
+-Scenario principale di successo
+	1. Il Manager richiede l'assegnazione di un capitano per una attività sportiva.
+	2. Il Sistema identifica la squadra associata al Manager.
+	3. Il Sistema mostra le attività sportive alle quali partecipa almeno un atleta della squadra.
+	4. Il Manager seleziona un'attività sportiva.
+	5. Il Sistema individua gli atleti della squadra iscritti all'attività selezionata.
+	6. Il Sistema recupera i risultati ottenuti durante l'anno in corso dagli atleti individuati.
+	7. Il Sistema determina quale atleta ha ottenuto i migliori risultati.
+	8. Il Sistema mostra al Manager l'atleta individuato come capitano.
+	9. Il Manager conferma l'assegnazione.
+	10. Il Sistema assegna il ruolo di capitano all'atleta individuato.
+	11. Il Sistema registra l'assegnazione.
+	12. Il Sistema conferma al Manager che l'operazione è stata completata correttamente.
+
+Estensioni
+	3a. Nessuna attività disponibile
+		1. Il Sistema non trova alcuna attività sportiva alla quale partecipi almeno un atleta della squadra.
+		2. Il Sistema informa il Manager che non è possibile assegnare un capitano.
+		3. Il caso d'uso termina.
+
+	5a. Nessun atleta iscritto all'attività
+		1. Il Sistema non trova atleti della squadra iscritti all'attività selezionata.
+		2. Il Sistema informa il Manager che non esistono candidati disponibili.
+		3. Il caso d'uso termina.
+
+	6a. Nessun risultato disponibile
+		1. Il Sistema non dispone di risultati sufficienti per determinare quale sia il miglior atleta.
+		2. Il Sistema informa il Manager che non è possibile completare l'assegnazione.
+		3. Il caso d'uso termina.
+
+	7a. Parità tra più atleti
+		1. Il Sistema rileva che più atleti hanno ottenuto i medesimi migliori risultati.
+		2. Il Sistema mostra gli atleti in parità.
+		3. Il Manager seleziona uno degli atleti proposti.
+		4. Il Sistema continua dal passo 10.
+
+Requisiti speciali
+	- Il capitano deve appartenere alla squadra del Manager.
+	- Il capitano deve essere iscritto all'attività sportiva selezionata.
+	- Il capitano deve essere scelto tra gli atleti che hanno ottenuto i migliori risultati nell'anno in corso.
+	- Il sistema deve conservare lo storico delle assegnazioni dei capitani.
+	- Il sistema deve utilizzare i risultati memorizzati per generare classifiche delle attività e delle squadre.
+
+Frequenza di ripetizione: Questo caso d'uso viene eseguito ogni volta che un Manager deve assegnare un capitano per una attività sportiva.
+
+Problemi aperti
+	- Non è specificato quale criterio debba essere utilizzato in caso di parità tra più atleti con i migliori risultati.
+	- Non è specificato se un capitano già assegnato possa essere sostituito successivamente.
+	- Non è specificato se il sistema debba notificare all'atleta l'avvenuta assegnazione del ruolo di capitano.

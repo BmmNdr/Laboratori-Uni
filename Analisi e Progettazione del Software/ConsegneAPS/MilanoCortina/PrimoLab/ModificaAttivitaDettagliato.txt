@@ -1,0 +1,36 @@
+Nome del Caso d'Uso: ModificaAttività.
+AttorePrimario: MembroOrganizzativo.
+Portata: Sistema Software Olimpiadi Milano-Cortina 2026.
+Livello: Obiettivo Utente.
+Parti interessate e interessi: L'utente MembroOrganizzativo vuole poter Modificare una Attività.
+Pre-Condizioni: Il MembroOrganizzativo deve esistere nel sistema. L'attività deve esistere nel sistema.
+Post-Condizioni:  I dati dell'Attività selezionata sono aggiornati nel sistema con i nuovi valori inseriti dal Membro Organizzativo
+
+Scenario Principale di Successo:
+    1. Il Caso d'Uso inizia quando l'Utente accede al Sistema.
+    2. L'Utente seleziona il Login come Membro Organizzativo.
+    3. Il Sistema richiede l'autenticazione del Membro. (Includi LoginMembro)
+    4. Il Sistema mostra la lista delle attività esistenti al Membro Organizzativo.
+    5. Il Membro Organizzativo seleziona l'Attività da Modificare.
+    6. Il Membro Organizzativo effettua le modifiche desiderate sui campi dell'Attività Selezionata.
+    7. Il Membro Organizzativo conferma le modifiche.
+    8. Il Sistema verifica e conferma le modifiche.
+
+Estensioni:
+    3a. Il Login Fallisce
+        3a.1. Il Sistema notifica il fallimento del Login.
+              Si torna al passo 2.
+    5a. Il Membro Organizzativo seleziona una attività già pubblicata.
+        5a.1. Il Sistema notifica che non è possibile modificare l'attività.
+              Si torna al Passo 4.
+    6a. Il Membro Organizzativo annula le modifiche.
+        6a.1. Il Sistema annula le modifiche.
+              Si torna al passo 4.
+    8a. Le modifiche non sono valide.
+        8a.1. Il Sistema annulla le modifiche.
+        8a.2  Il Sistema notificha al Membro Organizzativo i campi di modifica non validi.
+              Si torna al passo 6.
+
+Extension Points: -
+Requisiti Speciali: -
+Frequenza di Ripetizione: Molte volte al minuto.

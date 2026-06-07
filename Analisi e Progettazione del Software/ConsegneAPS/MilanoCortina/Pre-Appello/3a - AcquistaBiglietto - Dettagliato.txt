@@ -1,0 +1,51 @@
+Nome del Caso d'Uso: AcquistaBiglietto
+AttorePrimario: Visitatore.
+Portata: Sistema Software Olimpiadi Milano-Cortina 2026.
+Livello: Obiettivo Utente.
+Parti interessate e interessi: L'utente Visitatore vuole poter Acquistare un Biglietto ed il Sistema vuole applicare sconti all'acquisto
+
+Precondizioni:
+    1. Il Visitatore è registrato e ha eseguito con successo il login al sistema
+    2. Le vendite per attività/eventi sono aperte
+
+Postcondizioni:
+    1. Viene creato un Acquisto associato al Visitatore e marcato come pagato.
+    2. Vengono creati i Biglietti associati all'Acquisto e alle rispettive Attività.
+    3. Il costo totale registrato nell'Acquisto è aggiornato applicando la strategia di sconto corretta.
+    4. I posti acquistati vengono rimossi in modo definitivo dalla disponibilità dell'evento.
+
+Scenario Principale di Successo:
+    1. Il Visitatore seleziona biglietti per attivita' e/o eventi.
+    2. Il Visitatore richiede di procedere al pagamento dei biglietti selezionati.
+       Il sistema blocca i biglietti per 10 minuti fino alla conferma/annullamento dell'acquisto (per non creare biglietti duplicati).
+    3. Il Sistema calcola il costo base dell'acquisto (senza applicare sconti).
+    4. Il Sistema analizza la composizione dei biglietti per determinare se si applica uno sconto (Estensione: Applica Sconto).
+    5. Il Sistema visualizza all'utente Visitatore la schermata di riepilogo con subtotale, eventuale sconto applicato e costo complessivo finale.
+    6. Il Visitatore inserisce i dati e conferma la transazione.
+    7. Il Sistema di Pagamento verifica l'acquisto
+    8. Il Sistema genera i Biglietti e decrementa la disponibilita' per le attivita' coinvolte.
+    9. Il Sistema genera la ricevuta digitale e mostra la conferma a schermo
+
+Estensioni:
+    1a. Non sono disponibili biglietti per l'attivita' selezionata
+        Si torna al passo 1.
+    5a. L'utente annulla l'ordine
+        5a1. I biglietti tornano disponibili per tutti gli utenti
+        Si torna al passo 1.
+    6a. L'utente dimentica di inserire dei dati obbligatori
+        6a.1 Il Sistema notifica la mancanza di questi dati
+        Si torna al passo 6
+    7a. Il Sistema di Pagamento non conferma l'acquisto
+        Si torna al passo 6
+
+    Per ogni passo: Se il timer di blocco biglietti scade torna al passo 1.
+
+Extension Points:
+    4a. Applica Sconto:
+        - Se il carrello contiene biglietti per due attività diverse, viene applicato lo Sconto2Attivita (5%).
+        - Se contiene biglietti per un'attività e un evento, viene applicato lo ScontoAttivita&Evento (8%).
+        - Se contiene biglietti per più di due attività o eventi complessivi, viene applicato lo ScontoMultipleAttivita (10%).
+        - Il flusso riprende dal punto 5 inserendo lo sconto calcolato nel riepilogo.
+
+Requisiti Speciali: -
+Frequenza di Ripetizione: Molte volte al secondo.

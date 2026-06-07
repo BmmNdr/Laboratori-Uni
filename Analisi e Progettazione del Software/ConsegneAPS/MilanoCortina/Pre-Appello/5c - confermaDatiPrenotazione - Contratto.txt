@@ -1,0 +1,10 @@
+Contratto prenotaBiglietti
+Operazione: prenotaBiglietti(attività, n_posti)
+Riferimenti caso d'uso: PrenotaPosti
+Precondizioni: è in corso una prenotazione di posti per un evento o un'attività
+Postcondizioni:
+             - E' creata un'istanza di Prenotazione p (creazione oggetto)
+             - p.num_posti è aggiornato (modifica attributo)
+             - p.dataPrenotazione è aggiornato (modifica attributo)
+             - p.tipoNotifica è aggiornato (modifica attributo)
+             

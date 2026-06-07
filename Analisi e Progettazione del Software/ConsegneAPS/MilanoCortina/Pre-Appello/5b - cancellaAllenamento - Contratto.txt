@@ -1,0 +1,14 @@
+Contratto cancellaAllenamento
+Operazione: cancellaAllenamento()
+Riferimenti caso d'uso: CancellaSessioneAllenamento
+Precondizioni:
+	- E' richiesta la cancellazione di una sessione di allenamento S da parte di un allenatore autenticato A.
+	- Manca piu' di un'ora all'inizio di S
+	- Esiste una lista delle sessioni di allenamento L
+	- Esiste un sistema esterno per le notifiche N
+Postcondizioni:
+	- L'associazione di S con L e' stata rimossa (Rottura di collegamento)
+	- Sono stati rimossi i collegamenti tra gli atleti Atl e la sessione S (Rottura di collegamento)
+	- S e' stata cancellata (Cancellazione di un oggetto)
+	- L e' stata aggiornata (Cambiamento di valore di attributo)
+	- N notifica agli atleti Atl la cancellazione della sessione S

@@ -1,0 +1,16 @@
+﻿Contratto: assegnaCapitano
+Operazione: assegnaCapitano(attivita : Attivita, atleta : Atleta)
+Riferimenti Caso d'uso: AssegnaCapitano
+
+Pre-condizioni:
+	- Il Manager è identificato e autenticato.
+	- Il Manager è associato a una Squadra.
+	- L'Attivita selezionata esiste nel sistema.
+	- L'Atleta selezionato appartiene alla Squadra del Manager.
+	- L'Atleta selezionato è iscritto all'Attivita selezionata.
+	- Il sistema conosce i risultati ottenuti dagli atleti nell'anno in corso.
+
+Post-condizioni:
+	- L'attributo isCapitano dell'Atleta selezionato è diventato true. (modifica di attributo)
+	- L'Atleta selezionato è stato associato al ruolo di capitano per l'Attivita selezionata. (formazione di collegamento)
+	- L'assegnazione del capitano per l'Attivita selezionata è stata registrata dal sistema. (modifica dello stato del sistema)

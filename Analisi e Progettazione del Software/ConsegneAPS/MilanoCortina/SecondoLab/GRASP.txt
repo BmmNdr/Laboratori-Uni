@@ -1,0 +1,29 @@
+Information Expert:
+	- Attività conosce il proprio stato di pubblicazione (isPubblicata)
+	- AttivitàCompetitiva conosce il conteggio di Membri Sportivi Iscritti
+	- ComitatoSportivo ha la conoscenza sui propri membri
+	- ComitatoOrganizzativo ha la conoscenza sui propri membri
+	- Squadra ha la conoscenza sugli Atleti
+	- Atleta ha la conoscenza sul proprio Allenatore
+
+Creator:
+	- ComitatoOlimpico crea ComitatoSportivo e ComitatoOrganizzativo
+	- ComitatoSportivo crea MembroSportivo
+	- ComitatoOrganizzativo crea MembroOrganizzativo
+	- Attività crea il Ranking
+
+High Cohesion:
+	- Separazione tra Evento e Attività Competitiva
+	- Valutazione come classe separata, invece di attributo in Atleta o Membro Sportivo
+	- Separazione tra Biglietto e Acquisto
+	- Ranking separato da Attività
+
+Low Coupling:
+	- Valutazione come classe intermedia disaccoppia MembroSportivo da Atleta.
+
+Polymorphism:
+	- Superclasse Attivita
+	- SUperclasse MembroComitato
+	- SUperclasse Utente
+
+

@@ -1,0 +1,45 @@
+Nome del caso d'uso: PrenotaPosti
+
+Attore Primario: Utente
+
+Portata: Sistema MilanoCortina2026
+
+Livello: Obiettivo Utente
+
+Attore Primario: Utente
+
+Parti interessate e interessi: L'utente vuole prenotare uno o più posti per un'attività o un evento di cui la vendita non è ancora aperta o i posti sono esauriti
+
+Pre-condizioni: L'utente deve esistere nel sistema, l'utente deve essersi registrato nel sistema, gli eventi o le attività su cui effettuare le prenotazioni esistono nel sistema, la vendita non è ancora aperta o i posti sono esauriti
+
+Post-condizioni: E' creata una nuova prenotazione
+
+Scenario Principale di Successo:
+              1. Il caso d'uso inizia quando l'utente accede al sistema.
+              2. L'utente seleziona il login come visitatore.
+              3. Il sistema richiede l'autenticazione dell'utente.(Includi LoginUtente)
+              4. Il sistema mostra il calendario delle attività. 
+              5. Il visitatore seleziona l'attività o l'evento di cui vuole prenotare i posti. (Includi RicercaCalendario)
+              6. Il visitatore seleziona il posto che vuole prenotare.
+              Ripeti il passo 6 fino a che il visitatore non ha terminato di selezionare i posti.
+              7. Il visitatore conferma i dati di prenotazione
+              8. Il sistema conferma la prenotazione avvenuta.
+
+Estensioni:
+      3a. I dati di login sono errati
+         3a.1 Il sistema notifica l'errore. Si torna al punto 2.
+      5a. Il visitatore seleziona un'attività o evento già terminato
+         5a.1 Il sistema notifica l'impossibilità di prenotare posti per l'attività o evento. Si torna al passo 4.
+      7a. Il visitatore annulla la prenotazione in corso
+         7a.1 Il sitema notifica l'annullamento della prenotazione. Il caso d'uso termina.
+      7b. Il visitatore vuole modificare la prenotazione
+         7b.1 Il sistema mostra il calendario delle attività. Si torna al punto 4.
+
+Extension Points:-
+
+Requisiti Speciali:-
+
+Frequenza di ripetizione: Potenzialmente ininterrotta
+      
+ 
+

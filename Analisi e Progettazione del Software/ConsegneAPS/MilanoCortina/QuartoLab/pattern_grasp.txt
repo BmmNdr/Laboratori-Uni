@@ -1,0 +1,163 @@
+PATTERN APPLICATI - PROGETTO MILANO-CORTINA 2026
+
+1. DESIGN PATTERNS
+
+1.1 Singleton
+
+Classi coinvolte:
+- SistemaOlimpiadi
+- GestioneAccessiController
+- GestioneProgrammaController
+- GestioneIscrizioniController
+- GestioneBiglietteriaController
+- GestioneValutazioniController
+- GestioneBudgetController
+- CalendarioController
+
+Motivazione:
+
+L'applicazione del pattern Singleton garantisce l'esistenza di una sola istanza dell'oggetto all'interno del sistema e fornisce un punto di accesso globale ad essa.
+Queste classi presentano l'attributo statico "instance" e il metodo "getInstance()"
+
+
+1.2 Facade
+
+Classi coinvolte:
+- SistemaOlimpiadi
+- GestioneAccessiController
+- GestioneProgrammaController
+- GestioneIscrizioniController
+- GestioneBiglietteriaController
+- GestioneValutazioniController
+- GestioneBudgetController
+- CalendarioController
+
+Motivazione:
+
+La classe SistemaOlimpiadi rappresenta un punto di accesso centralizzato ai principali sottosistemi dell'applicazione. Essa coordina le funzionalità relative ad accessi, programma, iscrizioni, biglietteria, valutazioni, budget e calendario, semplificando l'interazione con il sistema.
+Allo stesso modo il resto dei Controller rappresentano un punto di accesso a casi d'uso dell'applicazione.
+
+2. PATTERN GRASP APPLICATI
+
+2.1 Controller
+
+Classi coinvolte:
+- GestioneAccessiController
+- GestioneProgrammaController
+- GestioneIscrizioniController
+- GestioneBiglietteriaController
+- GestioneValutazioniController
+- GestioneBudgetController
+- CalendarioController
+
+Motivazione:
+
+Secondo il pattern Controller, le operazioni di sistema devono essere assegnate a classi che ricevono e coordinano le richieste provenienti dagli utenti. Nel progetto ogni controller è responsabile di una specifica area funzionale del sistema.
+
+
+2.2 Creator
+
+Classi coinvolte:
+- GestioneAccessiController
+- GestioneProgrammaController
+- GestioneBiglietteriaController
+- GestioneIscrizioniController
+
+Motivazione:
+
+Secondo il pattern Creator, la responsabilità di creare un oggetto dovrebbe essere assegnata alla classe che lo contiene, lo registra, lo utilizza strettamente oppure possiede le informazioni necessarie alla sua inizializzazione. I controller gestiscono la creazione e registrazione delle principali entità del dominio come utenti, attività, acquisti, biglietti e iscrizioni.
+
+
+2.3 Information Expert
+
+Classi coinvolte:
+- Attivita
+- AttivitaCompetitiva
+- Acquisto
+- Ranking
+
+Motivazione:
+
+Secondo il pattern Information Expert, una responsabilità deve essere assegnata alla classe che possiede le informazioni necessarie per soddisfarla. Attivita possiede le informazioni relative a luogo, data e stato di pubblicazione; Acquisto conosce il costo e i biglietti associati; Ranking mantiene la classifica; AttivitaCompetitiva gestisce le informazioni relative ai valutatori.
+
+
+2.4 Low Coupling
+
+Classi coinvolte:
+- GestioneAccessiController
+- GestioneProgrammaController
+- GestioneIscrizioniController
+- GestioneBiglietteriaController
+- GestioneValutazioniController
+- GestioneBudgetController
+- CalendarioController
+- Classi del dominio
+
+Motivazione:
+
+Il sistema è suddiviso in controller specializzati che riducono le dipendenze dirette tra le classi. Questa scelta limita l'accoppiamento tra i componenti e facilita modifiche ed estensioni future del sistema.
+
+
+2.5 High Cohesion
+
+Classi coinvolte:
+- GestioneAccessiController
+- GestioneProgrammaController
+- GestioneBiglietteriaController
+- GestioneIscrizioniController
+- GestioneValutazioniController
+- GestioneBudgetController
+
+Motivazione:
+
+Ogni controller è focalizzato su una singola area funzionale e possiede responsabilità coerenti tra loro. Questo mantiene alta la coesione delle classi e rende il sistema più comprensibile e manutenibile.
+
+
+2.6 Indirection
+
+Classi coinvolte:
+- GestioneAccessiController
+- GestioneProgrammaController
+- GestioneIscrizioniController
+- GestioneBiglietteriaController
+- GestioneValutazioniController
+- GestioneBudgetController
+- CalendarioController
+- Utente
+- Attivita
+- Acquisto
+- Iscrizione
+
+Motivazione:
+
+I controller fungono da intermediari tra gli attori del sistema e gli oggetti del dominio. Questo evita un accoppiamento diretto tra interfaccia utente e logica applicativa, favorendo il riuso e la flessibilità del progetto.
+
+
+2.7 Polymorphism
+
+Classi coinvolte:
+- Utente
+- Visitatore
+- Atleta
+- MembroOrganizzativo
+- MembroSportivo
+- Attivita
+- Evento
+- AttivitaCompetitiva
+
+Motivazione:
+
+La presenza di gerarchie di ereditarietà consente di trattare oggetti differenti tramite una classe generale, delegando alle sottoclassi eventuali comportamenti specifici. Questo permette di estendere il sistema senza modificare il codice esistente.
+
+
+2.8 Protected Variations
+
+Classi coinvolte:
+- Utente
+- Attivita
+- MembroOrganizzativo
+- MembroSportivo
+
+Motivazione:
+
+L'utilizzo di superclassi e specializzazioni permette di isolare i punti soggetti a variazioni future. Nuove tipologie di utenti o attività possono essere aggiunte senza impattare significativamente il resto del sistema, garantendo una maggiore stabilità dell'architettura.

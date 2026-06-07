@@ -1,0 +1,18 @@
+Contratto cancellaAttivita'
+Operazione: cancellaAttivita'(idAttivita: Int)
+Riferimenti caso d'uso: cancellaAttivita'
+Precondizioni:
+	- Il MembroOrganizzativo è autenticato nel sistema.
+	- L'attività a con id=idAttività esiste nel sistema
+	- a.pubblicata = false
+	- Esiste una lista di attivita' l.
+	- Esistono degli atleti a.atl collegati all'attivita' a.
+	- Esiste un Calendario c.
+Postcondizioni:
+	- l'associazione dell'attivita' a con la lista di attivita' l e' stata rimossa (Rottura di collegamento)
+	- Sono stati rimossi i collegamenti tra gli Atleti atl e l'attivita' a (Rottura di Collegamento)
+	- l'attivita' a e' stata cancellata (Cancellazione di un oggetto)
+	- Il valore della lista l viene aggiornato (Cambiamento di valore di attributo)
+	- c.listaAttività non contiene più a (rottura di collegamento)
+	- Il sistema notifica la cancellazione.
+	
