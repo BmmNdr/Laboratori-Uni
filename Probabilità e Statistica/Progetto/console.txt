@@ -1,0 +1,41 @@
+> setwd("/home/bmmndr/Desktop/Laboratori-Uni/Probabilità e Statistica/Progetto/")
+> dati <- read.csv("Dati Tariffe.csv", header = TRUE)
+> colnames(dati) <- c("Distanza", "Tariffa")
+> plot(dati$Distanza, dati$Tariffa,
++      main = "Relazione Distanza del Volo vs Tariffa Media",
++      xlab = "Distanza (km)",
++      ylab = "Tariffa (€)",
++      pch = 19, col = "darkblue")
+> modello_tariffe <- lm(Tariffa ~ Distanza, data = dati)
+> abline(modello_tariffe, col = "red", lwd = 2)
+> summary(modello_tariffe)
+
+Call:
+lm(formula = Tariffa ~ Distanza, data = dati)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-43.994 -11.864  -0.313  10.490  46.734
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)
+(Intercept) 63.897763   4.685264   13.64   <2e-16 ***
+Distanza     0.098688   0.003914   25.21   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 18.98 on 103 degrees of freedom
+Multiple R-squared:  0.8606,	Adjusted R-squared:  0.8592
+F-statistic: 635.6 on 1 and 103 DF,  p-value: < 2.2e-16
+
+> nuovo_volo <- data.frame(Distanza = 3000)
+> stima_puntuale <- predict(modello_tariffe, nuovo_volo)
+> cat("\nLa stima puntuale per un volo di 3000 km è:", stima_puntuale, "€\n")
+
+La stima puntuale per un volo di 3000 km è: 359.9616 €
+> intervallo <- predict(modello_tariffe, nuovo_volo, interval = "prediction", level = 0.95)
+> cat("Intervallo di previsione al 95%:\n")
+Intervallo di previsione al 95%:
+> print(intervallo)
+       fit      lwr      upr
+1 359.9616 319.3681 400.5551
