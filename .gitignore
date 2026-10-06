@@ -1,0 +1,7 @@
+# Algorithms course
+/Analisi e Progetto di Algoritmi/build/
+
+# C/C++ generated files
+*.o
+*.a
+*.so
