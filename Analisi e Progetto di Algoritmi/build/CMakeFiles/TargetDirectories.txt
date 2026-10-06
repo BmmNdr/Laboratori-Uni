@@ -1,0 +1,4 @@
+/home/bmmndr/Desktop/Laboratori-Uni/Analisi e Progetto di Algoritmi/build/CMakeFiles/lcs.dir
+/home/bmmndr/Desktop/Laboratori-Uni/Analisi e Progetto di Algoritmi/build/CMakeFiles/wis.dir
+/home/bmmndr/Desktop/Laboratori-Uni/Analisi e Progetto di Algoritmi/build/CMakeFiles/edit_cache.dir
+/home/bmmndr/Desktop/Laboratori-Uni/Analisi e Progetto di Algoritmi/build/CMakeFiles/rebuild_cache.dir
