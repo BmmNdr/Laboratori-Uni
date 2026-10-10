@@ -1,5 +1,4 @@
 //Programmazione_dinamica/lcs.cpp
-#include <ostream>
 #include <string>
 #include <iostream>
 
