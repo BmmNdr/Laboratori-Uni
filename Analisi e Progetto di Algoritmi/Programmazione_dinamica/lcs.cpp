@@ -3,8 +3,6 @@
 #include <string>
 #include <iostream>
 
-#define LEN 4
-
 int** lcs(std::string X, std::string Y);
 int** init_matrix(int m, int n);
 void print_lcs(int i, int j, std::string X, std::string Y, int** c);
