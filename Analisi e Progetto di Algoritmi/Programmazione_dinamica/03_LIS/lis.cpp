@@ -1,4 +1,4 @@
-//Programmazione_dinamica/lis.cpp
+//Programmazione_dinamica/03_LIS/lis.cpp
 #include <iostream>
 
 #define N 8

@@ -1,4 +1,4 @@
-//Programmazione_dinamica/lcs.cpp
+//Programmazione_dinamica/01_LCS/lcs.cpp
 #include <string>
 #include <iostream>
 

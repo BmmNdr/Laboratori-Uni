@@ -1,4 +1,4 @@
-//Programmazione_dinamica/wis.cpp
+//Programmazione_dinamica/02_WIS/wis.cpp
 #include <algorithm>
 #include <vector>
 #include <iostream>
