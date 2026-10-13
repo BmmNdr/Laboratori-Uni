@@ -7,7 +7,7 @@
 #   x + y <= 1750
 #   4x + 2y <= 4800
 
-#sudo pacman -S glpk
+# sudo pacman -S glpk
 import pyomo.environ as pyo
 
 # Software che effettua l'ottimizzazione
