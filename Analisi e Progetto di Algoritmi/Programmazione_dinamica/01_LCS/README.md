@@ -3,7 +3,7 @@ Progetto con codice esempio per la risoluzione di LCS tra due String
 
 ## Problema
 **Istanza**: $X_m=<x_1,...,x_m>$ e $Y_n=<y_1,...,y_n>$ su alfabeto $\Sigma$
-**Soluzione**: $Z$ sottosequenza sia di $X$ che di $Y$ t.c. $|Z|=max\{|W|:W$ sottoseq. sia di $X$ che di $Y\}$
+**Soluzione**: $Z$ sottosequenza sia di $X$ che di $Y$ t.c. $|Z|=max\{|W|:W sottoseq. sia di X che di Y\}$
 indichiamo che $Z=LCS(X_m,Y_n)$.
 
 ## Sottoproblemi $(i,j)$
